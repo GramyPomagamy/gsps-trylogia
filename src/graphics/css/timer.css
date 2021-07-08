@@ -1,0 +1,23 @@
+.timerRunning {
+    color: white;
+}
+
+.timerFinished {
+    color: #ffbd16;
+}
+
+.timerStopped .timerPaused {
+    color: #a5a3a3;
+}
+
+.timerLayout {
+    color: #a5a3a3;
+    width: 567px;
+    text-align: center;
+    font-size: 96px;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px black;
+    position: absolute;
+    top: 850px;
+    left: 0px;
+}

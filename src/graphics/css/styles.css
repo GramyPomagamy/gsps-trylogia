@@ -1,0 +1,13 @@
+@import './gyre/stylesheet.css';
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: "TeXGyreHeros";
+    display: block;
+    width: 1920px;
+    height: 1080px;
+}

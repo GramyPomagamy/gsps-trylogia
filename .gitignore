@@ -1,4 +1,2 @@
 node_modules
-.parcel-cache
-dashboard
-graphics
+.parcel_cache
