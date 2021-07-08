@@ -1,0 +1,20 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"additionalProperties": false,
+
+	"properties": {
+		"socketIP": {
+			"type": "string",
+			"description": "Address of the companion WebSocket.",
+			"default": "http://localhost"
+		},
+        "socketPort": {
+            "type": "string",
+            "description": "Port of the companion WebSocket.",
+            "default": 6942
+        }
+	},
+
+	"required": ["musicTitlePath"]
+}
