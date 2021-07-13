@@ -49,7 +49,7 @@ export default function Player() {
                         <option value={"dexterw"}>dexterw</option>
                         <option value={"zola"}>zola</option>
                         <option value={"pitpo"}>pitpo</option>
-                        <option value={"hoxi"}>hoxi</option>
+                        <option value={"Zaborski"}>Zaborski</option>
                     </Select>    
                 </FormControl>
             </ThemeProvider>
