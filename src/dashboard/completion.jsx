@@ -20,6 +20,7 @@ const Completion = () => {
             <Container>
                 <Typography align="center" variant="h6">Obecny procent ukończenia {currentSplit}:</Typography>
                 <Typography align="center" variant="h4"><b>{completion}%</b></Typography>
+            </Container>
         </ThemeProvider>
     )
 }
