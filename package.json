@@ -25,21 +25,28 @@
         "title": "Runner",
         "width": 3,
         "file": "Player.html",
-        "headerColor": "#525F78"
+        "headerColor": "#41228e"
       },
       {
         "name": "splits",
         "title": "Splity",
         "width": 5,
         "file": "splits.html",
-        "headerColor": "#525F78"
+        "headerColor": "#41228e"
       },
       {
         "name": "countdown",
         "title": "Odliczanie",
         "width": 3,
         "file": "countdown.html",
-        "headerColor": "#525F78"
+        "headerColor": "#41228e"
+      },
+      {
+        "name": "completion",
+        "title": "Procencik",
+        "width": 3,
+        "file": "completion.html",
+        "headerColor": "#41228e"
       }
     ],
     "graphics": [
