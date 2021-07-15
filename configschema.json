@@ -10,7 +10,7 @@
 			"default": "http://localhost"
 		},
         "socketPort": {
-            "type": "string",
+            "type": "number",
             "description": "Port of the companion WebSocket.",
             "default": 6942
         }
