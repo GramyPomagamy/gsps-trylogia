@@ -46,7 +46,7 @@ const Splits = () => {
                 </Table>
             </TableContainer>
             <br/>
-            <Button disabled={SCTimer.state != 'running'} variant="contained" color="primary" onClick={() => {nodecg.sendMessage('split')}}>Następna gra</Button>
+            <Button disabled={SCTimer.state != 'running'} variant="contained" color="primary" onClick={() => {nodecg.sendMessage('split')}}>{currentSplit === "GTA: San Andreas" ? <>Zakończ timer</> : <>Następna gra</>}</Button>
             <br/>
             <br/>
             <Button variant="contained" color="primary" onClick={() => {nodecg.sendMessage('resetSplits')}}>Zresetuj wszystkie splity</Button>

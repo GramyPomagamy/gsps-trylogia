@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {render} from 'react-dom';
 import style from './css/styles.css';
 import layoutUrl from 'url:./img/mainLayout.png';
@@ -120,6 +120,7 @@ const Main = () => {
     const [clock] = useReplicant('clock');
     const [splits] = useReplicant('splits', []);
     const [completion] = useReplicant('completion');
+    const tl = useRef(gsap.timeline({repeat: -1}));
 
     const timerColors = {
         running: 'white',
@@ -129,7 +130,7 @@ const Main = () => {
     }
 
     const CTAs = [
-        "Dołącz do naszej społeczności na Discordzie na <b>discord.gsps.pl!</b>",
+        "Dołącz do naszej społeczności na Discordzie na <b>gsps.pl/discord!</b>",
         "Jako grupa speedrunnerów GTA, próbujemy właśnie razem ukończyć <b>GTA III, Vice City i San Andreas</b> na 100% w jednym podejściu!",
         "Więcej o GSPS (polskim charytatywnym wydarzeniu speedrunningowym) znajdziesz na <b>gsps.pl!</b>"
     ]
@@ -152,10 +153,10 @@ const Main = () => {
     });
 
     useEffect(() => {
-        const tl = gsap.timeline({repeat: -1});
         CTAs.map((CTA, id) => {
-            tl.to(`#cta-${id}`, {left: '170px', duration: 2, ease: "power2.out"});
-            tl.to(`#cta-${id}`, {left: '-1025px', duration: 2, ease: "power2.in"}, ">6");
+            tl.current
+                .to(`#cta-${id}`, {left: '170px', duration: 2, ease: "power2.out"})
+                .to(`#cta-${id}`, {left: '-1025px', duration: 2, ease: "power2.in"}, ">6");
         });
     }, [])
 
