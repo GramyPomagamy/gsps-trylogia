@@ -44,7 +44,7 @@ function handleSplit() {
     if (currentSplitIndex <= 2) {
         const originalSplitTime = splitsRep.value[currentSplitIndex].originalTime;
         const currentSplitTime = SCTimer.value.milliseconds;
-        const delta = currentSplitTime - originalSplitTime
+        const delta = currentSplitTime - originalSplitTime;
         splitsRep.value[currentSplitIndex].originalTime = currentSplitTime;
         splitsRep.value[currentSplitIndex].formattedOriginalTime = msToTimeStr(currentSplitTime);
         splitsRep.value[currentSplitIndex].delta = delta;
@@ -86,9 +86,9 @@ function resetTimerRep() {
 
 function msToTimeStr(ms) {
     let str = '';
-    const seconds = Math.floor((ms / 1000) % 60);
-    const minutes = Math.floor((ms / (1000 * 60)) % 60);
-    const hours = Math.floor(ms / (1000 * 60 * 60));
+    const seconds = Math.floor((Math.abs(ms) / 1000) % 60);
+    const minutes = Math.floor((Math.abs(ms) / (1000 * 60)) % 60);
+    const hours = Math.floor(Math.abs(ms) / (1000 * 60 * 60));
     if (hours) {
         str += `${hours}:`
     }
@@ -97,12 +97,21 @@ function msToTimeStr(ms) {
 }
 
 function deltaToTimeStr(ms) {
+    let negative;
+    if (ms < 0) {
+        negative = true;
+    }
     let str = '';
-    const seconds = Math.floor((ms / 1000) % 60);
-    const minutes = Math.floor((ms / (1000 * 60)) % 60);
-    const hours = Math.floor(ms / (1000 * 60 * 60));
+    const seconds = Math.floor((Math.abs(ms) / 1000) % 60);
+    const minutes = Math.floor((Math.abs(ms) / (1000 * 60)) % 60);
+    const hours = Math.floor(Math.abs(ms) / (1000 * 60 * 60));
     if (hours) {
-        str += `${hours}:`
+        if (negative) {
+            str += `-${hours}:`
+        }
+        else {
+            str += `${hours}:`
+        }
     }
     str += `${padTimeNumber(Math.abs(minutes))}:${padTimeNumber(Math.abs(seconds))}`;
     if (str.charAt(0) != '-' && ms != 0) {
