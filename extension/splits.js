@@ -1,133 +1,61 @@
 'use strict';
-
-const nodecg = require('./util/nodecg-api-context').get();
-const logger = new nodecg.Logger(`${nodecg.bundleName}:splity`);
-const SCTimer = nodecg.Replicant('timer', 'nodecg-speedcontrol');
-
-const splitsRep = nodecg.Replicant('splits', { defaultValue: [
-    {
-        name: "GTA III",
-        originalTime: 47203000,
-        formattedOriginalTime: msToTimeStr(47203000),
-        delta: 0,
-        formattedDelta: deltaToTimeStr(0)
-    },
-    {
-        name: "GTA: Vice City",
-        originalTime: 103140000,
-        formattedOriginalTime: msToTimeStr(103140000),
-        delta: 0,
-        formattedDelta: deltaToTimeStr(0)
-    },
-    {
-        name: "GTA: San Andreas",
-        originalTime: 197828000,
-        formattedOriginalTime: msToTimeStr(197828000),
-        delta: 0,
-        formattedDelta: deltaToTimeStr(0)
-    }
-]});
-
-const currentSplitRep = nodecg.Replicant('currentSplit', { defaultValue: "GTA III" });
-
+Object.defineProperty(exports, "__esModule", { value: true });
+const nodecg_1 = require("./util/nodecg");
+const replicants_1 = require("./util/replicants");
+const helpers_1 = require("./util/helpers");
 const splitNames = [
     "GTA III",
     "GTA: Vice City",
     "GTA: San Andreas"
-]
-
+];
 function handleSplit() {
-    const currentSplitIndex = splitNames.indexOf(currentSplitRep.value);
+    const currentSplitIndex = splitNames.indexOf(replicants_1.currentSplitRep.value);
     if (currentSplitIndex < 2) {
-        currentSplitRep.value = splitNames[currentSplitIndex + 1];
+        replicants_1.currentSplitRep.value = splitNames[currentSplitIndex + 1];
     }
     if (currentSplitIndex <= 2) {
-        const originalSplitTime = splitsRep.value[currentSplitIndex].originalTime;
-        const currentSplitTime = SCTimer.value.milliseconds;
+        const originalSplitTime = replicants_1.splitsRep.value[currentSplitIndex].originalTime;
+        const currentSplitTime = replicants_1.timerRep.value.milliseconds;
         const delta = currentSplitTime - originalSplitTime;
-        splitsRep.value[currentSplitIndex].originalTime = currentSplitTime;
-        splitsRep.value[currentSplitIndex].formattedOriginalTime = msToTimeStr(currentSplitTime);
-        splitsRep.value[currentSplitIndex].delta = delta;
-        splitsRep.value[currentSplitIndex].formattedDelta = deltaToTimeStr(delta);
+        replicants_1.splitsRep.value[currentSplitIndex].originalTime = currentSplitTime;
+        replicants_1.splitsRep.value[currentSplitIndex].formattedOriginalTime = (0, helpers_1.msToTimeStr)(currentSplitTime);
+        replicants_1.splitsRep.value[currentSplitIndex].delta = delta;
+        replicants_1.splitsRep.value[currentSplitIndex].formattedDelta = (0, helpers_1.deltaToTimeStr)(delta);
     }
     if (currentSplitIndex === 2) {
-        const team = {id: "f926048c-3527-4d2f-96f6-680b81bf06e6"}
-        nodecg.sendMessageToBundle('timerStop', 'nodecg-speedcontrol', (team, false))
+        (0, nodecg_1.get)().sendMessage('timerFinish');
     }
 }
-
 function resetTimerRep() {
-    currentSplitRep.value = "GTA III";
-    splitsRep.value = [
+    replicants_1.currentSplitRep.value = "GTA III";
+    replicants_1.splitsRep.value = [
         {
             name: "GTA III",
-            originalTime: 47203000,
-            formattedOriginalTime: msToTimeStr(47203000),
+            originalTime: 40284000,
+            formattedOriginalTime: (0, helpers_1.msToTimeStr)(40284000),
             delta: 0,
-            formattedDelta: deltaToTimeStr(0)
+            formattedDelta: (0, helpers_1.deltaToTimeStr)(0)
         },
         {
             name: "GTA: Vice City",
-            originalTime: 103140000,
-            formattedOriginalTime: msToTimeStr(103140000),
+            originalTime: 83839000,
+            formattedOriginalTime: (0, helpers_1.msToTimeStr)(83839000),
             delta: 0,
-            formattedDelta: deltaToTimeStr(0)
+            formattedDelta: (0, helpers_1.deltaToTimeStr)(0)
         },
         {
             name: "GTA: San Andreas",
-            originalTime: 197828000,
-            formattedOriginalTime: msToTimeStr(197828000),
+            originalTime: 177395000,
+            formattedOriginalTime: (0, helpers_1.msToTimeStr)(177395000),
             delta: 0,
-            formattedDelta: deltaToTimeStr(0)
+            formattedDelta: (0, helpers_1.deltaToTimeStr)(0)
         }
     ];
-    logger.info("Zresetowano splity");
+    (0, nodecg_1.get)().log.info("[Splity] Zresetowano splity");
 }
-
-function msToTimeStr(ms) {
-    let str = '';
-    const seconds = Math.floor((Math.abs(ms) / 1000) % 60);
-    const minutes = Math.floor((Math.abs(ms) / (1000 * 60)) % 60);
-    const hours = Math.floor(Math.abs(ms) / (1000 * 60 * 60));
-    if (hours) {
-        str += `${hours}:`
-    }
-    str += `${padTimeNumber(Math.abs(minutes))}:${padTimeNumber(Math.abs(seconds))}`;
-    return str;
-}
-
-function deltaToTimeStr(ms) {
-    let negative;
-    if (ms < 0) {
-        negative = true;
-    }
-    let str = '';
-    const seconds = Math.floor((Math.abs(ms) / 1000) % 60);
-    const minutes = Math.floor((Math.abs(ms) / (1000 * 60)) % 60);
-    const hours = Math.floor(Math.abs(ms) / (1000 * 60 * 60));
-    if (hours) {
-        if (negative) {
-            str += `-${hours}:`
-        }
-        else {
-            str += `${hours}:`
-        }
-    }
-    str += `${padTimeNumber(Math.abs(minutes))}:${padTimeNumber(Math.abs(seconds))}`;
-    if (str.charAt(0) != '-' && ms != 0) {
-        str = `+${str}`;
-    }
-    return str;
-}
-
-function padTimeNumber(num) {
-  return num.toString().padStart(2, '0');
-}
-
-nodecg.listenFor('split', () => {
+(0, nodecg_1.get)().listenFor('split', () => {
     handleSplit();
 });
-
-nodecg.listenFor('resetSplits', () => {
+(0, nodecg_1.get)().listenFor('resetSplits', () => {
     resetTimerRep();
 });

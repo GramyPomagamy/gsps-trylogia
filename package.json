@@ -1,98 +1,108 @@
 {
   "name": "gsps-trylogia",
   "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "nodecg": "node ../..",
-    "build": "run-p build:*",
-    "watch": "run-p watch:*",
-    "watch:dashboard": "npx parcel watch src/dashboard/*.html --dist-dir=dashboard --public-url=.",
-    "build:dashboard": "npx parcel build src/dashboard/*.html --dist-dir=dashboard --public-url=.",
-    "watch:graphics": "npx parcel watch src/graphics/*.html --dist-dir=graphics --public-url=.",
-    "build:graphics": "npx parcel build src/graphics/*.html --dist-dir=graphics --public-url=."
+  "description": "Layouts used during the 2022 GTA 3D Trilogy 100% relay.",
+  "homepage": "https://github.com/GramyPomagamy/gsps-trylogia#readme",
+  "bugs": {
+    "url": "https://github.com/GramyPomagamy/gsps-trylogia/issues"
   },
-  "files": [
-    "dashboard",
-    "graphics",
-    "extension.js",
-    "extension"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GramyPomagamy/gsps-trylogia.git"
+  },
+  "license": "MIT",
+  "author": "GramyPomagamy",
+  "scripts": {
+    "autofix": "run-s autofix:*",
+    "autofix:browser": "eslint --fix --ext .ts,.vue src/dashboard && eslint --fix --ext .ts,.vue src/graphics && eslint --fix --ext .ts,.vue src/browser_shared",
+    "autofix:extension": "eslint --fix --ext .ts src/extension && eslint --fix --ext .d.ts src/types",
+    "build": "run-s build:*",
+    "build:browser": "cross-env NODE_ENV=production webpack",
+    "build:extension": "tsc -b tsconfig.extension.json",
+    "clean": "trash node_modules/.cache && trash dashboard && trash graphics && trash extension",
+    "schema-types": "nodecg schema-types",
+    "start": "node ../..",
+    "watch": "run-p watch:*",
+    "watch:browser": "cross-env NODE_OPTIONS=--max_old_space_size=8192 webpack -w",
+    "watch:extension": "tsc -b tsconfig.extension.json -w"
+  },
+  "dependencies": {
+    "events": "^3.3.0",
+    "gsap": "^3.10.4",
+    "livesplit-core": "^0.10.2",
+    "milliseconds": "^1.0.3",
+    "module-alias": "^2.2.2",
+    "parse-ms": "^2.1.0",
+    "socket.io-client": "^4.5.1"
+  },
+  "devDependencies": {
+    "@fontsource/roboto": "^4.5.3",
+    "@mdi/font": "^6.5.95",
+    "@types/clone": "^2.1.1",
+    "@types/milliseconds": "^0.0.30",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^16.11.26",
+    "@types/webpack-env": "^1.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "@vue/component-compiler-utils": "^3.3.0",
+    "clone": "^2.1.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.6.0",
+    "deepmerge": "^4.2.2",
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-import-resolver-webpack": "^0.13.2",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-vue": "^8.5.0",
+    "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.1",
+    "globby": "^13.1.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "nodecg-cli": "^8.0.0",
+    "npm-run-all": "^4.1.5",
+    "sass": "~1.32",
+    "sass-loader": "^12.6.0",
+    "trash-cli": "^5.0.0",
+    "ts-loader": "^9.2.6",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "typescript": "^4.5.5",
+    "vue": "^2.6.14",
+    "vue-class-component": "^7.2.6",
+    "vue-eslint-parser": "^8.3.0",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-loader": "^15.9.8",
+    "vue-property-decorator": "^9.1.2",
+    "vue-style-loader": "^4.1.3",
+    "vue-template-compiler": "^2.6.14",
+    "vuetify": "^2.6.3",
+    "vuetify-loader": "^1.7.3",
+    "vuex": "^3.6.2",
+    "vuex-class": "^0.3.2",
+    "vuex-module-decorators": "^1.2.0",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-livereload-plugin": "^3.0.2"
+  },
   "nodecg": {
-    "compatibleRange": "^1.1.1",
+    "compatibleRange": "^1.8.1",
     "dashboardPanels": [
       {
-        "name": "player",
-        "title": "Runner",
-        "width": 3,
-        "file": "Player.html",
-        "headerColor": "#41228e"
-      },
-      {
-        "name": "splits",
-        "title": "Splity",
-        "width": 5,
-        "file": "splits.html",
-        "headerColor": "#41228e"
-      },
-      {
-        "name": "countdown",
-        "title": "Odliczanie",
-        "width": 3,
-        "file": "countdown.html",
-        "headerColor": "#41228e"
-      },
-      {
-        "name": "completion",
-        "title": "Procencik",
-        "width": 3,
-        "file": "completion.html",
-        "headerColor": "#41228e"
+        "name": "timer",
+        "title": "Timer",
+        "file": "timer.html",
+        "width": 3
       }
     ],
     "graphics": [
-      {
-        "file": "countdown.html",
-        "width": 1920,
-        "height": 1080
-      },
       {
         "file": "main.html",
         "width": 1920,
         "height": 1080
       }
-    ],
-    "bundleDependencies": {
-      "nodecg-speedcontrol": "^2.2.0"
-    }
-  },
-  "author": "GramyPomagamy",
-  "contributors": [
-    "hoxi"
-  ],
-  "license": "ISC",
-  "dependencies": {
-    "@material-ui/core": "^4.12.0",
-    "@material-ui/icons": "^4.11.2",
-    "gsap": "^3.7.0",
-    "livesplit-core": "^0.10.2",
-    "milliseconds": "^1.0.3",
-    "npm-run-all": "^4.1.5",
-    "parse-ms": "^2.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-fast-marquee": "^1.2.1",
-    "socket.io-client": "^4.1.2",
-    "styled-components": "^5.3.0",
-    "use-nodecg": "^0.4.1-1",
-    "ws": "^7.5.2"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.14.5",
-    "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.7",
-    "@babel/preset-react": "^7.14.5",
-    "@parcel/transformer-image": "^2.0.0-nightly.2377",
-    "parcel": "^2.0.0-nightly.753",
-    "sharp": "^0.28.3"
+    ]
   }
 }

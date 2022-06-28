@@ -1,20 +1,27 @@
 {
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"type": "object",
-	"additionalProperties": false,
-
-	"properties": {
-		"socketIP": {
-			"type": "string",
-			"description": "Address of the companion WebSocket.",
-			"default": "http://localhost"
-		},
-        "socketPort": {
-            "type": "number",
-            "description": "Port of the companion WebSocket.",
-            "default": 6942
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "socket": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Address of the companion WebSocket.",
+          "default": "localhost"
+        },
+        "port": {
+          "type": "number",
+          "description": "Port of the companion WebSocket.",
+          "default": 6942
         }
-	},
-
-	"required": ["socketIP", "socketPort"]
+      },
+      "required": ["address", "port"]
+    }
+  },
+  "required": [
+    "socket"
+  ]
 }
