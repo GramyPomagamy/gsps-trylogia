@@ -3,7 +3,7 @@ import clone from 'clone';
 import Vue from 'vue';
 import Vuex, { Store } from 'vuex';
 import { Action, getModule, Module, VuexModule } from 'vuex-module-decorators';
-import type { Timer } from '@gsps-trylogia/types/schemas';
+import type { Timer, Splits } from '@gsps-trylogia/types/schemas';
 
 Vue.use(Vuex);
 
@@ -17,6 +17,14 @@ class OurModule extends VuexModule {
   // Helper getter to return a specific replicant.
   get timer(): Timer {
     return this.reps.timerRep;
+  }
+
+  get splits(): Splits {
+    return this.reps.splitsRep;
+  }
+
+  get currentSplit(): string {
+    return this.reps.currentSplitRep;
   }
 }
 

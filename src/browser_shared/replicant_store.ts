@@ -1,28 +1,36 @@
-import type { Timer, Splits } from '@gsps-trylogia/types/schemas';
-import clone from 'clone';
-import type { ReplicantBrowser } from 'nodecg/types/browser';
-import Vue from 'vue';
-import type { Store } from 'vuex';
-import { namespace } from 'vuex-class';
-import { getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators';
+import type { Timer, Splits } from "@gsps-trylogia/types/schemas";
+import clone from "clone";
+import type { ReplicantBrowser } from "nodecg/types/browser";
+import Vue from "vue";
+import type { Store } from "vuex";
+import { namespace } from "vuex-class";
+import {
+  getModule,
+  Module,
+  Mutation,
+  VuexModule,
+} from "vuex-module-decorators";
 
 // Declaring replicants.
 export const reps: {
   timerRep: ReplicantBrowser<Timer>;
   splitsRep: ReplicantBrowser<Splits>;
+  currentSplitRep: ReplicantBrowser<string>;
   [k: string]: ReplicantBrowser<unknown>;
 } = {
-  timerRep: nodecg.Replicant('timer'),
-  splitsRep: nodecg.Replicant('splits'),
+  timerRep: nodecg.Replicant("timer"),
+  splitsRep: nodecg.Replicant("splits"),
+  currentSplitRep: nodecg.Replicant("currentSplit"),
 };
 
 // All the replicant types.
 export interface ReplicantTypes {
   timerRep: Timer;
   splitsRep: Splits;
+  currentSplitRep: string;
 }
 
-@Module({ name: 'ReplicantModule', namespaced: true })
+@Module({ name: "ReplicantModule", namespaced: true })
 export class ReplicantModule extends VuexModule {
   // Replicant values are stored here.
   reps: { [k: string]: unknown } = {};
@@ -33,13 +41,13 @@ export class ReplicantModule extends VuexModule {
 
   // This sets the state object above when a replicant sends an update.
   @Mutation
-  setState({ name, val }: { name: string, val: unknown }): void {
+  setState({ name, val }: { name: string; val: unknown }): void {
     Vue.set(this.reps, name, clone(val));
   }
 
   // This is a generic mutation to update a named replicant.
   @Mutation
-  setReplicant<K>({ name, val }: { name: string, val: K }): void {
+  setReplicant<K>({ name, val }: { name: string; val: K }): void {
     Vue.set(this.reps, name, clone(val)); // Also update local copy, although no schema validation!
     reps[name].value = clone(val);
   }
@@ -47,13 +55,13 @@ export class ReplicantModule extends VuexModule {
 
 // eslint-disable-next-line import/no-mutable-exports
 export let replicantModule!: ReplicantModule;
-export const replicantNS = namespace('ReplicantModule');
+export const replicantNS = namespace("ReplicantModule");
 
 export async function setUpReplicants(store: Store<unknown>): Promise<void> {
   // Listens for each declared replicants "change" event, and updates the state.
   Object.keys(reps).forEach((name) => {
-    reps[name].on('change', (val) => {
-      store.commit('ReplicantModule/setState', { name, val });
+    reps[name].on("change", (val) => {
+      store.commit("ReplicantModule/setState", { name, val });
     });
   });
   // We should make sure the replicant are ready to be read, needs to be done in browser context.

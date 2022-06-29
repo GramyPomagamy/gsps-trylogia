@@ -1,8 +1,6 @@
 /* eslint import/prefer-default-export: off */
 
-import clone from "clone";
 import livesplitCore from "livesplit-core";
-import { Configschema } from "@gsps-trylogia/types/schemas";
 import { msToTimeStr, processAck, timeStrToMS } from "./util/helpers";
 import { get as nodecg } from "./util/nodecg";
 import { timerRep } from "./util/replicants";
