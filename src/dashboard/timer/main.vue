@@ -13,7 +13,7 @@
                 @click="startTimer"
                 :disabled="phase === 'finished'"
                 >{{
-                    phase === 'running' ? 'Zatrzymaj timer' : 'Rozpocznij timer'
+                    phase === 'running' ? 'Zapauzuj timer' : 'Rozpocznij timer'
                 }}</v-btn
             >
             <v-btn

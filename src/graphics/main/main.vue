@@ -11,10 +11,15 @@
       <span class="splitsGame" v-for="split in splits" :key="split.name">
         <b>{{ split.name }}</b>
         <template v-if="split.delta != 0">
-          - {split.formattedOriginalTime} ({split.formattedDelta})</template
+          - {{ split.formattedOriginalTime }} ({{
+            split.formattedDelta
+          }})</template
         >
       </span>
     </div>
+    <span id="timer" :style="{ color: timerColors[timer.phase] }">{{
+      timer.time
+    }}</span>
   </div>
 </template>
 
@@ -31,17 +36,21 @@ export default class extends Vue {
   @Getter readonly splits!: Splits;
   @Getter readonly currentSplit!: string;
 
-  timerColors = {
-    running: "white",
-    finished: "#ffbd16",
-    stopped: "#a5a3a3",
-    paused: "#a5a3a3",
-  };
+  data() {
+    return {
+      timerColors: {
+        running: "white",
+        finished: "#ffbd16",
+        stopped: "#a5a3a3",
+        paused: "#a5a3a3",
+      },
+    };
+  }
 }
 </script>
 
 <style>
-@import url('../css/styles.css');
+@import url("../css/styles.css");
 
 #container {
   display: flex;
@@ -67,7 +76,7 @@ export default class extends Vue {
   top: 536px;
   text-align: center;
   text-shadow: 2px 2px 8px black;
-    display: flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -92,7 +101,7 @@ export default class extends Vue {
   text-align: center;
   text-shadow: 2px 2px 8px black;
   color: white;
-    display: flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -108,5 +117,16 @@ export default class extends Vue {
   margin-bottom: 5px;
   width: 100%;
   font-size: 32px;
+}
+
+#timer {
+  width: 567px;
+  text-align: center;
+  font-size: 96px;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px black;
+  position: absolute;
+  top: 865px;
+  left: 0px;
 }
 </style>
