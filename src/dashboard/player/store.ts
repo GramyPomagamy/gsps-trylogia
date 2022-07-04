@@ -7,7 +7,6 @@ import clone from "clone";
 import Vue from "vue";
 import Vuex, { Store } from "vuex";
 import { Action, getModule, Module, VuexModule } from "vuex-module-decorators";
-import type { Timer, Splits } from "@gsps-trylogia/types/schemas";
 
 Vue.use(Vuex);
 
@@ -19,26 +18,17 @@ class OurModule extends VuexModule {
   }
 
   // Helper getter to return a specific replicant.
-  get timer(): Timer {
-    return this.reps.timerRep;
-  }
-
-  get splits(): Splits {
-    return this.reps.splitsRep;
-  }
-
-  get currentSplit(): string {
-    return this.reps.currentSplitRep;
-  }
-
   get currentPlayer(): string {
     return this.reps.currentPlayerRep;
   }
 
-  get completion(): string {
-    return this.reps.completionRep;
+  @Action({ rawError: true })
+  updatePlayer(player: string): void {
+    replicantModule.setReplicant<string>({
+      name: "currentPlayerRep",
+      val: player,
+    });
   }
-
 }
 
 const store = new Store({

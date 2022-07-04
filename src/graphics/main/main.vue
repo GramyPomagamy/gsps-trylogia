@@ -1,7 +1,12 @@
 <template>
   <div id="container">
     <img src="./mainLayout.png" />
-    <div id="nameplate"></div>
+    <div id="nameplate">
+      <transition name="fade" mode="out-in">
+        <span :key="currentPlayer">{{ currentPlayer }}</span>
+      </transition>
+    </div>
+
     <div id="currentGame">
       <span id="currentGameTitle">OBECNA GRA</span>
       <span id="currentGameName">{{ currentSplit }}</span>
@@ -20,6 +25,7 @@
     <span id="timer" :style="{ color: timerColors[timer.phase] }">{{
       timer.time
     }}</span>
+    <omnibar id="omnibar" />
   </div>
 </template>
 
@@ -27,14 +33,18 @@
 import { Vue, Component } from "vue-property-decorator";
 import type { Timer, Splits } from "@gsps-trylogia/types/schemas";
 import { Getter } from "vuex-class";
-// import { replicantNS } from '@nodecg-vue-ts-template/browser_shared/replicant_store';
-import { storeModule } from "./store";
+import Omnibar from "./components/Omnibar.vue";
 
-@Component
+@Component({
+  components: {
+    Omnibar,
+  },
+})
 export default class extends Vue {
   @Getter readonly timer!: Timer;
   @Getter readonly splits!: Splits;
   @Getter readonly currentSplit!: string;
+  @Getter readonly currentPlayer!: string;
 
   data() {
     return {
@@ -128,5 +138,13 @@ export default class extends Vue {
   position: absolute;
   top: 865px;
   left: 0px;
+}
+
+#omnibar {
+  width: 100%;
+  height: 66px;
+  position: absolute;
+  top: 1015px;
+  background-image: url("./omnibar_bg.png");
 }
 </style>

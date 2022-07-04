@@ -97,15 +97,32 @@
         "width": 3
       },
       {
+        "name": "player",
+        "title": "Obecny gracz",
+        "file": "player.html",
+        "width": 3
+      },
+      {
         "name": "splits",
         "title": "Splity",
         "file": "splits.html",
         "width": 4
+      },
+      {
+        "name": "countdown",
+        "title": "Odliczanie",
+        "file": "countdown.html",
+        "width": 2
       }
     ],
     "graphics": [
       {
         "file": "main.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "odliczanie.html",
         "width": 1920,
         "height": 1080
       }
