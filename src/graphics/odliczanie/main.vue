@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <img id="Logo" src="../main/gspsLogo.png" />
+    <img id="Logo" src="./gta_trylogia_2022_logo.png" />
     <img id="Background" src="./bg.png" />
     <div id="Countdown">
       <p id="CountdownTitle">ZACZYNAMY ZA</p>
@@ -51,7 +51,7 @@
 
   #Logo {
     margin-top: 60px;
-    width: 40%;
+    width: 24%;
   }
 
   #Countdown {
