@@ -1,0 +1,209 @@
+
+.cta[data-v-73cffdee] {
+  position: absolute;
+  top: 27px;
+  left: -1085px;
+  font-size: 20px;
+  color: white;
+}
+#completion[data-v-73cffdee] {
+  position: absolute;
+  top: 5px;
+  left: 170px;
+  font-size: 20px;
+  color: white;
+  text-shadow: 2px 2px 8px black;
+}
+#logoDiv[data-v-73cffdee] {
+  width: 160px;
+  height: 66px;
+  background-color: #3a008b;
+  z-index: 15;
+  position: absolute;
+}
+#logo[data-v-73cffdee] {
+  margin-top: -12px;
+  margin-left: -11px;
+  width: 115%;
+}
+#clockDiv[data-v-73cffdee] {
+  position: absolute;
+  left: 1759px;
+  top: 0px;
+  height: 66px;
+  width: 161px;
+  background-color: #3a008b;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  z-index: 15;
+}
+#clock[data-v-73cffdee] {
+  position: relative;
+  color: white;
+  top: 1px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+@font-face {
+    font-family: 'TeXGyreHeros';
+    src: url(../font/TeXGyreHeros-Bold.woff2) format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TeXGyreHeros';
+    src: url(../font/TeXGyreHeros-Regular.woff2) format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "TeXGyreHeros";
+  display: block;
+  width: 1920px;
+  height: 1080px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.7s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.marquee {
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee p {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-animation: scroll-left 0s linear infinite;
+  animation: scroll-left 15s linear infinite;
+}
+
+@-webkit-keyframes scroll-left {
+  0% {
+    -webkit-transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+
+
+#container {
+  display: flex;
+  flex-direction: column;
+}
+#nameplate {
+  top: 492px;
+  width: 567px;
+  height: 36px;
+  background-color: #3a008b;
+  text-align: center;
+  align-items: center;
+  position: absolute;
+  font-weight: bold;
+  color: white;
+  font-size: 26px;
+}
+#currentGame {
+  width: 567px;
+  position: absolute;
+  top: 536px;
+  text-align: center;
+  text-shadow: 2px 2px 8px black;
+  display: flex;
+  flex-direction: column;
+}
+#currentGameTitle {
+  color: white;
+  margin-top: 15px;
+  font-size: 24px;
+  font-weight: bold;
+}
+#currentGameName {
+  color: white;
+  margin-top: 15px;
+  font-size: 48px;
+  font-weight: bold;
+}
+#splits {
+  width: 567px;
+  position: absolute;
+  top: 640px;
+  text-align: center;
+  text-shadow: 2px 2px 8px black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+#splitsTitle {
+  color: white;
+  margin-top: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.splitsGame {
+  margin-bottom: 5px;
+  width: 100%;
+  font-size: 32px;
+}
+#timer {
+  width: 567px;
+  text-align: center;
+  font-size: 96px;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px black;
+  position: absolute;
+  top: 865px;
+  left: 0px;
+}
+#omnibar {
+  width: 100%;
+  height: 66px;
+  position: absolute;
+  top: 1015px;
+  background-image: url(../img/omnibar_bg-e04e08480901b1914770.png);
+}
+

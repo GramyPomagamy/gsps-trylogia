@@ -1,0 +1,155 @@
+@font-face {
+    font-family: 'TeXGyreHeros';
+    src: url(../font/TeXGyreHeros-Bold.woff2) format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'TeXGyreHeros';
+    src: url(../font/TeXGyreHeros-Regular.woff2) format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "TeXGyreHeros";
+  display: block;
+  width: 1920px;
+  height: 1080px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.7s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.marquee {
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee p {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-animation: scroll-left 0s linear infinite;
+  animation: scroll-left 15s linear infinite;
+}
+
+@-webkit-keyframes scroll-left {
+  0% {
+    -webkit-transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+
+
+#container {
+  text-align: center;
+}
+#Background {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+html {
+  display: block;
+  width: 1920px;
+  height: 1080px;
+  background-color: #41228e;
+}
+#Logo {
+  margin-top: 60px;
+  width: 40%;
+}
+#Countdown {
+  position: absolute;
+  width: 338px;
+  height: 180px;
+  left: 791px;
+  top: 616px;
+}
+#CountdownTitle {
+  position: absolute;
+  margin: auto;
+  font-size: 28.8px;
+  font-weight: bold;
+  height: 36px;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+#CountdownTimer {
+  margin-top: 20.4px !important;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 125px;
+  color: white !important;
+  font-weight: bold;
+  margin-bottom: -5px;
+  text-shadow: 2px 2px 8px black;
+}
+#CurrentSong {
+  position: absolute;
+  width: 700px;
+  height: 57.6px;
+  left: 610px;
+  top: 902px;
+}
+#SongText {
+  position: absolute;
+  margin: auto;
+  font-size: 24px;
+  font-weight: bold;
+  height: 30px;
+  color: white;
+  width: 100%;
+  bottom: 55px;
+}
+#SongTitle {
+  margin-top: 2px;
+  position: relative;
+  font-size: 26.4px;
+  color: white;
+  margin-left: 12px;
+  text-shadow: 2px 2px 8px #000000;
+}
+
