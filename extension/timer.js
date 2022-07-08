@@ -185,7 +185,7 @@ const liveSplitRun = livesplit_core_1.default.Run.new();
 liveSplitRun.pushSegment(livesplit_core_1.default.Segment.new("finish"));
 timer = livesplit_core_1.default.Timer.new(liveSplitRun);
 // If the timer was running when last closed, tries to resume it at the correct time.
-if (replicants_1.timerRep.value.state === "running") {
+if (replicants_1.timerRep.value.phase === "running") {
     const missedTime = Date.now() - replicants_1.timerRep.value.timestamp;
     const previousTime = replicants_1.timerRep.value.milliseconds;
     const timeOffset = previousTime + missedTime;
