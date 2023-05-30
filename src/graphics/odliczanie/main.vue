@@ -1,114 +1,102 @@
 <template>
   <div id="container">
-    <img id="Logo" src="./gta_trylogia_2022_logo.png" />
-    <img id="Background" src="./bg.png" />
-    <div id="Countdown">
-      <p id="CountdownTitle">ZACZYNAMY ZA</p>
-      <div id="CountdownTimer">{{ countdown.formatted }}</div>
+    <div id="logo">
+      <img src="../_misc/img/trylogia_logo.png" />
     </div>
-    <div id="CurrentSong">
-      <p id="SongText">OBECNA PIOSENKA</p>
-      <div class="marquee" id="SongTitle">
-        <p>{{ currentSong }}</p>
-      </div>
+    <div
+      id="countdown"
+      v-if="
+        countdown && countdown.data && countdownRunning && countdownRunning.data
+      "
+    >
+      <span id="time">{{ countdown.data.formatted }}</span>
+    </div>
+    <div id="song" class="Flex">
+      <v-icon name="bi-music-note" scale="1.5" />
+      <transition
+        mode="out-in"
+        appear
+        enter-active-class="animate__animated animate__fadeIn"
+        leave-active-class="animate__animated animate__fadeOut"
+      >
+        <div
+          v-if="song && song.data"
+          id="song-name"
+          class="marquee"
+          :key="song.data"
+        >
+          <p>{{ song.data }}</p>
+        </div></transition
+      >
     </div>
   </div>
 </template>
 
-<script lang="ts">
-  import { Vue, Component } from 'vue-property-decorator';
-  import type { Countdown } from '@gsps-trylogia/types/schemas';
-  import { Getter } from 'vuex-class';
+<script setup lang="ts">
+import { useReplicant } from "nodecg-vue-composable";
+import { Countdown, CountdownRunning } from "@gsps-trylogia/types/schemas";
 
-  @Component
-  export default class extends Vue {
-    @Getter readonly countdown!: Countdown; // from store.ts
-    @Getter readonly currentSong!: string;
-  }
+const countdown = useReplicant<Countdown>("countdown", "gsps-trylogia");
+const countdownRunning = useReplicant<CountdownRunning>(
+  "countdownRunning",
+  "gsps-trylogia"
+);
+const song = useReplicant<string>("nowPlaying", "gsps-trylogia");
 </script>
 
 <style>
-  @import url('../css/styles.css');
+@import url("../_misc/style.css");
 
-  #container {
-    text-align: center;
-  }
+#container {
+  background-image: url("../_misc/img/main-background.png");
+  width: 1920px;
+  height: 1030px;
+  margin: 0;
+  padding: 0;
+}
 
-  #Background {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-  }
+#logo {
+  position: fixed;
+  top: 180px;
+  width: 1920px;
+  height: 500px;
+  text-align: center;
+}
 
-  html {
-    display: block;
-    width: 1920px;
-    height: 1080px;
-    background-color: #41228e;
-  }
+#logo img {
+  height: 100%;
+}
 
-  #Logo {
-    margin-top: 60px;
-    width: 24%;
-  }
+#countdown {
+  font-size: 96px;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  top: 750px;
+}
 
-  #Countdown {
-    position: absolute;
-    width: 338px;
-    height: 180px;
-    left: 791px;
-    top: 616px;
-  }
+#time {
+  text-shadow: 2px 2px 12px black;
+}
 
-  #CountdownTitle {
-    position: absolute;
-    margin: auto;
-    font-size: 28.8px;
-    font-weight: bold;
-    height: 36px;
-    color: white;
-    width: 100%;
-    text-align: center;
-  }
+#song {
+  display: flex;
+  position: fixed;
+  top: 80px;
+  background: #e6e6e6;
+  height: 32px;
+  color: rgb(60, 60, 60);
+  width: 25%;
+  flex-direction: row;
+  gap: 8px;
+  font-size: 20px;
+  border-radius: 0px 7px 7px 0px;
+  align-content: space-between;
+  justify-content: space-between;
+}
 
-  #CountdownTimer {
-    margin-top: 20.4px !important;
-    margin-left: 15px;
-    margin-right: 15px;
-    font-size: 125px;
-    color: white !important;
-    font-weight: bold;
-    margin-bottom: -5px;
-    text-shadow: 2px 2px 8px black;
-  }
-
-  #CurrentSong {
-    position: absolute;
-    width: 700px;
-    height: 57.6px;
-    left: 610px;
-    top: 902px;
-  }
-
-  #SongText {
-    position: absolute;
-    margin: auto;
-    font-size: 24px;
-    font-weight: bold;
-    height: 30px;
-    color: white;
-    width: 100%;
-    bottom: 55px;
-  }
-
-  #SongTitle {
-    margin-top: 2px;
-    position: relative;
-    font-size: 26.4px;
-    color: white;
-    margin-left: 12px;
-    text-shadow: 2px 2px 8px #000000;
-  }
+#song-name {
+  width: 100%;
+  margin-top: -10px;
+}
 </style>

@@ -1,62 +1,82 @@
 <template>
-  <v-app>
+  <div
+    v-if="
+      splits &&
+      splits.data &&
+      timer &&
+      timer.data &&
+      currentSplit &&
+      currentSplit.data
+    "
+  >
     <div style="width: 100%; text-align: center">
-      <h2>Obecna gra: {{ currentSplit }}</h2>
+      <h5>
+        Obecna gra: <b>{{ currentSplit.data }}</b>
+      </h5>
     </div>
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">Gra</th>
-            <th class="text-right">+/-</th>
-            <th class="text-right">Split Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="split in splits" :key="split.name">
-            <td>{{ split.name }}</td>
-            <td>{{ split.formattedDelta }}</td>
-            <td>{{ split.formattedOriginalTime }}</td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
-    <v-btn @click="split" :disabled="phase != 'running'"
-      ><template v-if="currentSplit === 'GTA: San Andreas'"
-        >Zakończ timer</template
-      ><template v-else>Następna gra</template></v-btn
+    <QMarkupTable
+      style="margin-bottom: 10px"
+      separator="cell"
+      flat
+      bordered
+      v-if="splits && splits.data"
     >
-    <v-btn @click="resetSplits">Zresetuj splity</v-btn>
-  </v-app>
+      <thead>
+        <tr>
+          <th class="text-left"><b>Gra</b></th>
+          <th class="text-left"><b>+/-</b></th>
+          <th class="text-left"><b>Czas splita</b></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="split in splits.data" :key="split.name">
+          <td>{{ split.name }}</td>
+          <td>{{ split.formattedDelta }}</td>
+          <td>{{ split.formattedOriginalTime }}</td>
+        </tr>
+      </tbody>
+    </QMarkupTable>
+    <div style="display: flex; flex-direction: row; gap: 15px">
+      <QBtn
+        color="primary"
+        @click="split"
+        :disabled="timer.data.phase != 'running'"
+        ><template v-if="currentSplit.data === 'GTA: San Andreas'"
+          >Zakończ timer</template
+        ><template v-else>Następna gra</template></QBtn
+      >
+      <QBtn color="red" @click="resetSplits">Zresetuj splity</QBtn>
+    </div>
+  </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
-import type { Timer, Splits } from "@gsps-trylogia/types/schemas";
-import { Getter } from "vuex-class";
+<script setup lang="ts">
+import { useHead } from "@vueuse/head";
+import { useReplicant } from "nodecg-vue-composable";
+import { Timer, Splits, CurrentSplit } from "@gsps-trylogia/types/schemas";
 
-@Component
-export default class extends Vue {
-  @Getter readonly timer!: Timer; // from store.ts
-  @Getter readonly splits!: Splits;
-  @Getter readonly currentSplit!: string;
+useHead({ title: "Splity" });
 
-  get phase() {
-    return this.timer.phase;
+const timer = useReplicant<Timer>("timer", "gsps-trylogia");
+const splits = useReplicant<Splits>("splits", "gsps-trylogia");
+const currentSplit = useReplicant<CurrentSplit>(
+  "currentSplit",
+  "gsps-trylogia"
+);
+
+async function split(): Promise<void> {
+  try {
+    nodecg.sendMessage("split");
+  } catch (err) {
+    // err
   }
-  async split(): Promise<void> {
-    try {
-      nodecg.sendMessage('split')
-    } catch (err) {
-      // catch
-    }
-  }
-  async resetSplits(): Promise<void> {
-    try {
-      await nodecg.sendMessage("resetSplits");
-    } catch (err) {
-      // error
-    }
+}
+
+async function resetSplits(): Promise<void> {
+  try {
+    nodecg.sendMessage("resetSplits");
+  } catch (err) {
+    // err
   }
 }
 </script>

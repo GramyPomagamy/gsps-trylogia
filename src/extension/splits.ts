@@ -11,18 +11,18 @@ const splitNames = [
 ]
 
 function handleSplit() {
-    const currentSplitIndex = splitNames.indexOf(currentSplitRep.value);
+    const currentSplitIndex = splitNames.indexOf(currentSplitRep.value!);
     if (currentSplitIndex < 2) {
         currentSplitRep.value = splitNames[currentSplitIndex + 1];
     }
     if (currentSplitIndex <= 2) {
-        const originalSplitTime = splitsRep.value[currentSplitIndex].originalTime;
-        const currentSplitTime = timerRep.value.milliseconds;
+        const originalSplitTime = splitsRep.value![currentSplitIndex].originalTime;
+        const currentSplitTime = timerRep.value!.milliseconds;
         const delta = currentSplitTime - originalSplitTime;
-        splitsRep.value[currentSplitIndex].originalTime = currentSplitTime;
-        splitsRep.value[currentSplitIndex].formattedOriginalTime = msToTimeStr(currentSplitTime);
-        splitsRep.value[currentSplitIndex].delta = delta;
-        splitsRep.value[currentSplitIndex].formattedDelta = deltaToTimeStr(delta);
+        splitsRep.value![currentSplitIndex].originalTime = currentSplitTime;
+        splitsRep.value![currentSplitIndex].formattedOriginalTime = msToTimeStr(currentSplitTime);
+        splitsRep.value![currentSplitIndex].delta = delta;
+        splitsRep.value![currentSplitIndex].formattedDelta = deltaToTimeStr(delta);
     }
     if (currentSplitIndex === 2) {
         nodecg().sendMessage('timerFinish')
