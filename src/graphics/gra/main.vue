@@ -41,7 +41,7 @@
             ><span
               :style="{
                 fontSize:
-                  split.name === 'GTA: San Andreas' && split.delta != 0
+                  split.name != 'GTA III' && split.delta != 0
                     ? '32px'
                     : '40px',
               }"
