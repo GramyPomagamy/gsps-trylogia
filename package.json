@@ -108,6 +108,11 @@
         "file": "odliczanie.html",
         "width": 1920,
         "height": 1030
+      },
+      {
+        "file": "gra.html",
+        "width": 1920,
+        "height": 1030
       }
     ]
   }
