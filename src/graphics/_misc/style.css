@@ -52,3 +52,7 @@ body {
     transform: translateX(-100%);
   }
 }
+
+.shadow {
+  text-shadow: 2px 2px 12px black;
+}

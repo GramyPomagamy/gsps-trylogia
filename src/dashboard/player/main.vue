@@ -40,5 +40,6 @@ const players = [
   "Kappajog",
   "Fl1tch",
   "zibson",
+  "PokerFacowaty",
 ];
 </script>

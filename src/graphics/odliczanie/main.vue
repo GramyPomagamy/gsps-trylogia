@@ -9,7 +9,7 @@
         countdown && countdown.data && countdownRunning && countdownRunning.data
       "
     >
-      <span id="time">{{ countdown.data.formatted }}</span>
+      <span id="time" class="shadow">{{ countdown.data.formatted }}</span>
     </div>
     <div id="song" class="Flex">
       <v-icon name="bi-music-note" scale="1.5" />
@@ -73,10 +73,6 @@ const song = useReplicant<string>("nowPlaying", "gsps-trylogia");
   text-align: center;
   position: fixed;
   top: 750px;
-}
-
-#time {
-  text-shadow: 2px 2px 12px black;
 }
 
 #song {
