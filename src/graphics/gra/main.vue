@@ -113,8 +113,8 @@ const completion = useReplicant<string>("completion", "gsps-trylogia");
 #timer {
   background-color: #e6e6e6;
   color: rgb(60, 60, 60);
-  padding: 10px;
-  font-size: 64px;
+  padding: 5px;
+  font-size: 72px;
   font-family: "Oswald";
 }
 
