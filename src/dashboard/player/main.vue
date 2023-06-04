@@ -1,51 +1,45 @@
 <template>
-  <v-app>
-    <div style="margin-bottom: 200px">
-      <v-select
-        :items="players"
-        label="Obecny gracz"
-        v-model="selectedPlayer"
-        outlined
+  <div v-if="currentPlayer">
+    <div style="margin-bottom: 10px; font-size: 20px">
+      Obecny gracz: <b>{{ currentPlayer.oldData }}</b>
+    </div>
+    <div style="display: flex; flex-direction: column; margin-bottom: 15px">
+      <QRadio
+        v-model="currentPlayer.data"
+        v-for="player in players"
+        :val="player"
+        :label="player"
       />
     </div>
-    <v-btn @click="updatePlayer">Zmień obecnego gracza</v-btn>
-  </v-app>
+
+    <QBtn
+      color="primary"
+      :disable="!currentPlayer.changed"
+      @click="currentPlayer?.save()"
+      >Zapisz zmiany</QBtn
+    >
+  </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component, Watch } from "vue-property-decorator";
-import { Getter } from "vuex-class";
-import { storeModule } from "./store";
+<script setup lang="ts">
+import { useHead } from "@vueuse/head";
+import { useReplicant } from "nodecg-vue-composable";
 
-@Component
-export default class extends Vue {
-  @Getter readonly currentPlayer!: string; // from store.ts
+useHead({ title: "Wybór gracza" });
 
-  data() {
-    return {
-      selectedPlayer: "PokerFacowaty",
-      players: [
-        "PokerFacowaty",
-        "zola",
-        "zibson",
-        "Zaborski",
-        "pitpo",
-        "dexterw",
-      ],
-    };
-  }
+const currentPlayer = useReplicant<string>("currentPlayer", "gsps-trylogia", {
+  defaultValue: "PokerFacowaty",
+});
 
-  @Watch("currentPlayer")
-  onPlayerChange(newVal: string) {
-    this.$data.selectedPlayer = newVal;
-  }
-
-  mounted() {
-    this.$data.selectedPlayer = this.currentPlayer;
-  }
-
-  updatePlayer() {
-    storeModule.updatePlayer(this.$data.selectedPlayer);
-  }
-}
+const players = [
+  "hoxi",
+  "Mr. Mary",
+  "Zaborski",
+  "pitpo",
+  "zola",
+  "Kappajog",
+  "Fl1tch",
+  "zibson",
+  "PokerFacowaty",
+];
 </script>

@@ -33,8 +33,8 @@ function resetTimerRepToDefault(): void {
  * @param ms Milliseconds you want to set the timer replicant at.
  */
 function setTime(ms: number): void {
-	timerRep.value.time = msToTimeStr(ms);
-	timerRep.value.milliseconds = ms;
+	timerRep.value!.time = msToTimeStr(ms);
+	timerRep.value!.milliseconds = ms;
 	// nodecg.log.debug(`[Timer] Set to ${msToTimeStr(ms)}/${ms}`);
 }
 
@@ -44,7 +44,7 @@ function setTime(ms: number): void {
  * @param ms Milliseconds you want to set the game time at.
  */
 function setGameTime(ms: number): void {
-	if (timerRep.value.phase === "stopped") {
+	if (timerRep.value!.phase === "stopped") {
 		livesplitCore.TimeSpan.fromSeconds(0).with((t) =>
 			timer.setLoadingTimes(t)
 		);
@@ -67,11 +67,11 @@ async function startTimer(force?: boolean): Promise<void> {
 			throw new Error("Timer changes are disabled");
 		}
 		// Error if the timer is finished.
-		if (timerRep.value.state === "finished") {
+		if (timerRep.value!.state === "finished") {
 			throw new Error("Timer is in the finished state");
 		}
 		// Error if the timer isn't stopped or paused (and we're not forcing it).
-		if (!force && !["stopped", "paused"].includes(timerRep.value.phase)) {
+		if (!force && !["stopped", "paused"].includes(timerRep.value!.phase)) {
 			throw new Error("Timer is not stopped/paused");
 		}
 
@@ -82,8 +82,8 @@ async function startTimer(force?: boolean): Promise<void> {
 			timer.resume();
 			nodecg().log.debug("[Timer] Resumed");
 		}
-		setGameTime(timerRep.value.milliseconds);
-		timerRep.value.phase = "running";
+		setGameTime(timerRep.value!.milliseconds);
+		timerRep.value!.phase = "running";
 	} catch (err) {
 		nodecg().log.debug("[Timer] Cannot start/resume timer:", err);
 		throw err;
@@ -96,12 +96,12 @@ async function startTimer(force?: boolean): Promise<void> {
 async function pauseTimer(): Promise<void> {
 	try {
 		// Error if the timer isn't running.
-		if (timerRep.value.phase !== "running") {
+		if (timerRep.value!.phase !== "running") {
 			throw new Error("Timer is not running");
 		}
 
 		timer.pause();
-		timerRep.value.phase = "paused";
+		timerRep.value!.phase = "paused";
 		nodecg().log.debug("[Timer] Paused");
 	} catch (err) {
 		nodecg().log.debug("[Timer] Cannot pause timer:", err);
@@ -120,7 +120,7 @@ export async function resetTimer(force?: boolean): Promise<void> {
 			throw new Error("Timer changes are disabled");
 		}
 		// Error if the timer is stopped.
-		if (timerRep.value.phase === "stopped") {
+		if (timerRep.value!.phase === "stopped") {
 			throw new Error("Timer is stopped");
 		}
 
@@ -139,16 +139,16 @@ export async function resetTimer(force?: boolean): Promise<void> {
 async function stopTimer(): Promise<void> {
 	try {
 		// Error if timer is not running.
-		if (!["running", "paused"].includes(timerRep.value.phase)) {
+		if (!["running", "paused"].includes(timerRep.value!.phase)) {
 			throw new Error("Timer is not running/paused");
 		}
 
 		// Stop the timer if all the teams have finished (or no teams exist).
-		if (timerRep.value.state === "paused") {
+		if (timerRep.value!.phase === "paused") {
 			timer.resume();
 		}
 		timer.split();
-		timerRep.value.phase = "finished";
+		timerRep.value!.phase = "finished";
 		nodecg().log.debug("[Timer] Finished");
 	} catch (err) {
 		nodecg().log.debug("[Timer] Cannot stop timer:", err);
@@ -160,14 +160,14 @@ async function stopTimer(): Promise<void> {
  * This stuff runs every 1/10th a second to keep the time updated.
  */
 function tick(): void {
-	if (timerRep.value.phase === "running") {
+	if (timerRep.value!.phase === "running") {
 		// Calculates the milliseconds the timer has been running for and updates the replicant.
 		const time = timer
 			.currentTime()
 			.gameTime() as livesplitCore.TimeSpanRef;
 		const ms = Math.floor(time.totalSeconds() * 1000);
 		setTime(ms);
-		timerRep.value.timestamp = Date.now();
+		timerRep.value!.timestamp = Date.now();
 	}
 }
 
@@ -177,9 +177,9 @@ liveSplitRun.pushSegment(livesplitCore.Segment.new("finish"));
 timer = livesplitCore.Timer.new(liveSplitRun) as livesplitCore.Timer;
 
 // If the timer was running when last closed, tries to resume it at the correct time.
-if (timerRep.value.phase === "running") {
-	const missedTime = Date.now() - timerRep.value.timestamp;
-	const previousTime = timerRep.value.milliseconds;
+if (timerRep.value!.phase === "running") {
+	const missedTime = Date.now() - timerRep.value!.timestamp;
+	const previousTime = timerRep.value!.milliseconds;
 	const timeOffset = previousTime + missedTime;
 	setTime(timeOffset);
 	nodecg().log.info(
