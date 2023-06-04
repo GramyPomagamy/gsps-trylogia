@@ -1,23 +1,24 @@
 /* eslint-disable max-len */
-import type { Timer, Splits } from "@gsps-trylogia/types/schemas";
+import type NodeCG from "@nodecg/types";
+import type { Timer, Splits, CurrentSplit } from "@gsps-trylogia/types/schemas";
 import { get as nodecg } from "./nodecg";
 import { msToTimeStr, deltaToTimeStr } from "./helpers";
 
-/**
- * This is where you can declare all your replicant to import easily into other files,
- * and to make sure they have any correct settings on startup.
- */
-
-export const timerRep = nodecg().Replicant<Timer>("timer");
+export const timerRep = nodecg().Replicant<Timer>(
+  "timer"
+) as unknown as NodeCG.ServerReplicant<Timer>;
 export const songRep = nodecg().Replicant<string>("nowPlaying", {
   defaultValue: "",
-});
+}) as unknown as NodeCG.ServerReplicant<string>;
 export const completionRep = nodecg().Replicant<string>("completion", {
   defaultValue: "0",
-});
-export const currentSplitRep = nodecg().Replicant<string>("currentSplit", {
-  defaultValue: "GTA III",
-});
+}) as unknown as NodeCG.ServerReplicant<string>;
+export const currentSplitRep = nodecg().Replicant<CurrentSplit>(
+  "currentSplit",
+  {
+    defaultValue: "GTA III",
+  }
+) as unknown as NodeCG.ServerReplicant<string>;
 export const splitsRep = nodecg().Replicant<Splits>("splits", {
   defaultValue: [
     {
@@ -42,4 +43,4 @@ export const splitsRep = nodecg().Replicant<Splits>("splits", {
       formattedDelta: deltaToTimeStr(0),
     },
   ],
-});
+}) as unknown as NodeCG.ServerReplicant<Splits>;

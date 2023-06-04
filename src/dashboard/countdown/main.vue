@@ -1,69 +1,59 @@
 <template>
-  <v-app>
-    <v-text-field
+  <div v-if="countdownRunning && countdownRunning.data != undefined">
+    <QInput
       v-model="countdownText"
-      :disabled="countdownRunning"
+      :disable="countdownRunning.data"
       label="Czas odliczania"
-      filled
-    ></v-text-field>
-    <v-row no-gutters>
-      <v-col>
-        <v-btn
-          @click="startCountdown()"
-          :disabled="countdownRunning || countdownText.length == 0"
-        >
-          <v-icon left>mdi-play</v-icon>Rozpocznij</v-btn
-        >
-      </v-col>
-      <v-col>
-        <v-btn @click="stopCountdown()" :disabled="!countdownRunning">
-          <v-icon left>mdi-stop</v-icon>Zatrzymaj</v-btn
-        >
-      </v-col>
-    </v-row>
-  </v-app>
+      outlined
+      style="margin-bottom: 15px"
+    />
+    <div style="display: flex; flex-direction: row; gap: 15px">
+      <QBtn
+        color="primary"
+        @click="startCountdown()"
+        :disabled="countdownRunning.data || countdownText.length == 0"
+        >Rozpocznij</QBtn
+      >
+      <QBtn
+        color="red"
+        @click="stopCountdown()"
+        :disabled="!countdownRunning.data"
+        >Zatrzymaj</QBtn
+      >
+    </div>
+  </div>
 </template>
 
-<script lang="ts">
-  import { Vue, Component, Watch } from 'vue-property-decorator';
-  import type { Countdown } from '@gsps-trylogia/types/schemas/countdown';
-  import type { CountdownRunning } from '@gsps-trylogia/types/schemas/countdownRunning';
-  import { Getter } from 'vuex-class';
+<script setup lang="ts">
+import type { Countdown, CountdownRunning } from "@gsps-trylogia/types/schemas";
+import { useHead } from "@vueuse/head";
+import { useReplicant } from "nodecg-vue-composable";
+import { ref, watch } from "vue";
 
-  @Component
-  export default class extends Vue {
-    data() {
-      return {
-        countdownText: '10:00',
-        enteredTime: '10:00',
-      };
-    }
-    @Getter readonly countdown!: Countdown;
-    @Getter readonly countdownRunning!: CountdownRunning;
+useHead({ title: "Odliczanie" });
 
-    startCountdown(): void {
-      this.$data.enteredTime = this.$data.countdownText;
-      nodecg.sendMessage('startCountdown', this.$data.countdownText);
-    }
+const countdownText = ref("10:00");
+const countdown = useReplicant<Countdown>("countdown", "gsps-trylogia");
+const countdownRunning = useReplicant<CountdownRunning>(
+  "countdownRunning",
+  "gsps-trylogia"
+);
 
-    stopCountdown(): void {
-      nodecg.sendMessage('stopCountdown');
-      this.$data.countdownText = this.$data.enteredTime;
-    }
+function startCountdown() {
+  nodecg.sendMessage("startCountdown", countdownText.value);
+}
 
-    mounted() {
-      this.$data.countdownText = this.countdown.formatted;
-    }
+function stopCountdown() {
+  nodecg.sendMessage("stopCountdown");
+}
 
-    @Watch('countdown')
-    onCountdownChanged(value: Countdown) {
-      this.$data.countdownText = value.formatted;
+watch(
+  () => countdown?.data,
+  (newVal) => {
+    if (newVal) {
+      countdownText.value = newVal.formatted;
     }
-  }
+  },
+  { immediate: true }
+);
 </script>
-
-<style>
-  body {
-    text-align: center;
-  }
-</style>

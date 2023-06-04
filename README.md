@@ -1,3 +1,3 @@
 # gsps-trylogia
 
-TODO: add a better readme file
+TODO: Add a better readme
