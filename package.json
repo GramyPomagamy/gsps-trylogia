@@ -48,6 +48,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
+    "react-transition-group": "^4.4.5",
     "socket.io-client": "^4.6.2",
     "styled-components": "6.0.0-rc.3",
     "use-nodecg": "0.4.1-2"
@@ -58,6 +59,7 @@
     "@types/milliseconds": "^0.0.30",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "@types/react-transition-group": "^4.4.6",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "cheerio": "1.0.0-rc.12",
@@ -112,6 +114,16 @@
         "file": "odliczanie.html",
         "width": 1920,
         "height": 1030
+      },
+      {
+        "file": "gra.html",
+        "width": 1920,
+        "height": 1030
+      },
+      {
+        "file": "omnibar.html",
+        "width": 1920,
+        "height": 50
       }
     ]
   }

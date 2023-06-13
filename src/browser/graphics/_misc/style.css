@@ -1,5 +1,5 @@
-@import url("./fonts/oswald.css");
-@import url("./fonts/work_sans.css");
+@import url('./fonts/oswald.css');
+@import url('./fonts/work_sans.css');
 
 body {
   margin: 0;
@@ -7,7 +7,7 @@ body {
   overflow: hidden;
   color: white;
   font-weight: bold;
-  font-family: "Work Sans";
+  font-family: 'Work Sans';
 }
 
 .marquee {
@@ -55,4 +55,23 @@ body {
 
 .shadow {
   text-shadow: 2px 2px 12px black;
+}
+
+.highlight {
+  color: #5f3ac2;
+}
+
+.blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
 }

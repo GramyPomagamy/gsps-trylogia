@@ -1,12 +1,15 @@
-import { createRoot } from 'react-dom/client';
+import { render } from '../render';
 import trylogiaLogo from './_misc/img/trylogia_logo.png';
 import mainBg from './_misc/img/main-background.png';
 import { useReplicant } from 'use-nodecg';
-import './_misc/style.css';
 import { Countdown, CountdownRunning } from '../../types/generated';
 import styled from 'styled-components';
 import { IoIosMusicalNotes } from 'react-icons/io';
 import { IconContext } from 'react-icons';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import './_misc/style.css';
+import 'animate.css';
+import { useRef } from 'react';
 
 const LayoutContainer = styled.div`
   width: 1920px;
@@ -52,28 +55,52 @@ const SongDiv = styled.div`
   justify-content: space-between;
 `;
 
-const App = () => {
+const SongName = styled.div`
+  width: 100%;
+  margin-top: -10px;
+`;
+
+export const App = () => {
   const [countdown] = useReplicant<Countdown | undefined>('countdown', undefined);
   const [countdownRunning] = useReplicant<CountdownRunning>('countdownRunning', false);
+  const [song] = useReplicant<string>('nowPlaying', '');
+  const songRef = useRef(null);
+  const countdownRef = useRef(null);
 
   return (
     <LayoutContainer>
       <LogoDiv>
         <Logo src={trylogiaLogo} />
       </LogoDiv>
-      <CountdownDiv>
-        {countdownRunning && countdown && <span className="shadow">{countdown.formatted}</span>}
+      <CountdownDiv ref={countdownRef}>
+        {countdown && countdownRunning && <span className="shadow">{countdown.formatted}</span>}
       </CountdownDiv>
+
       <IconContext.Provider value={{ size: '1.5em' }}>
         {' '}
         <SongDiv>
           <IoIosMusicalNotes />
+          <SwitchTransition mode="out-in">
+            <CSSTransition
+              key={song}
+              nodeRef={songRef}
+              appear
+              in={true}
+              timeout={1000}
+              classNames={{
+                appearActive: 'animate__animated animate__fadeIn',
+                enterActive: 'animate__animated animate__fadeIn',
+                exitActive: 'animate__animated animate__fadeOut',
+              }}>
+              <SongName ref={songRef} className="marquee">
+                <p>{song}</p>
+              </SongName>
+            </CSSTransition>
+          </SwitchTransition>
         </SongDiv>
       </IconContext.Provider>
     </LayoutContainer>
   );
 };
 
-const container = document.getElementById('root');
-const root = createRoot(container!);
-root.render(<App />);
+render(<App />);
