@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"target": "ESNext",
+		"moduleResolution": "node",
+		"lib": [
+			"ESNext",
+			"DOM"
+		],
+		"types": [],
+		"sourceMap": true,
+		"importHelpers": true,
+		"resolveJsonModule": true,
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": false, // TODO: enable this
+		"noPropertyAccessFromIndexSignature": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"baseUrl": ".",
+		"esModuleInterop": true
+	}
+}

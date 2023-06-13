@@ -24,9 +24,8 @@ nodecg().listenFor('stopCountdown', () => {
 /**
  * Starts the countdown at the specified startTime.
  * @param {string} startTime - A formatted time string, such as 1:00 for one hour.
- * @returns {undefined}
  */
-function start(startTime: string = '10:00'): undefined {
+function start(startTime: string = '10:00'): void {
   if (running.value) {
     return;
   }
@@ -52,9 +51,8 @@ function start(startTime: string = '10:00'): undefined {
 
 /**
  * Stops the countdown.
- * @returns {undefined}
  */
-function stop(): undefined {
+function stop(): void {
   if (!running.value) {
     return;
   }

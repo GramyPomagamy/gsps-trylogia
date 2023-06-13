@@ -1,7 +1,5 @@
-import { get } from "./nodecg";
 import type NodeCG from "@nodecg/types";
 
-const nodecg = get();
 
 /**
  * Checks if number needs a 0 adding to the start and does so if needed.
