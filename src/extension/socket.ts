@@ -1,9 +1,8 @@
 import io from "socket.io-client";
-import { Configschema } from "@gsps-trylogia/types/schemas";
 import { get as nodecg } from "./util/nodecg";
 import { songRep, completionRep } from "./util/replicants";
 
-const config = (nodecg().bundleConfig as Configschema).socket;
+const config = nodecg().bundleConfig.socket;
 const socket = io("http://" + config.address + ":" + config.port);
 
 socket.on("connect", () => {
@@ -11,7 +10,7 @@ socket.on("connect", () => {
 });
 
 socket.on("disconnect", () => {
-  nodecg().log.info("[Socket] Connected to companion socket.");
+  nodecg().log.info("[Socket] Disconnected from companion socket.");
 });
 
 socket.on("completion", (data: string) => {
