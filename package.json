@@ -78,8 +78,7 @@
     "ts-nodecg": "^0.3.1",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
-    "vite-plugin-checker": "^0.6.0",
-    "vite-plugin-nodecg": "2.0.0-rc2"
+    "vite-plugin-checker": "^0.6.0"
   },
   "nodecg": {
     "compatibleRange": "^1.8.1 || ^2.0.0",

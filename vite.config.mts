@@ -14,4 +14,7 @@ export default defineConfig({
       dashboard: './src/browser/dashboard/*.tsx',
     }),
   ],
+  server: {
+    port: 3000,
+  },
 });
