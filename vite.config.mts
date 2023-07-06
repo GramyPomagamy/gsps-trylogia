@@ -12,6 +12,10 @@ export default defineConfig({
       bundleName: 'gsps-trylogia',
       graphics: './src/browser/graphics/*.tsx',
       dashboard: './src/browser/dashboard/*.tsx',
+      template: {
+        dashboard: './src/browser/dashboard/template.html',
+        graphics: './src/browser/graphics/template.html',
+      },
     }),
   ],
   server: {

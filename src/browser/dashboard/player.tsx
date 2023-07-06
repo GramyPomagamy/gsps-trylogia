@@ -10,7 +10,6 @@ const App = () => {
   );
 
   const players = [
-    'hoxi',
     'Mr. Mary',
     'Zaborski',
     'pitpo',

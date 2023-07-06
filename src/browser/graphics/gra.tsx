@@ -3,10 +3,7 @@ import { render } from '../render';
 import gameLayoutBg from './_misc/img/game-layout.png';
 import styled from 'styled-components';
 import { CurrentSplit, Splits as SplitsType, Timer as TimerType } from '../../types/generated';
-import './_misc/flex.css';
-import './_misc/style.css';
-import { MdGamepad } from 'react-icons/md';
-import { IconContext } from 'react-icons';
+import { GlobalStyle } from '../global-theme';
 
 const GameLayoutContainer = styled.div`
   background-image: url(${gameLayoutBg});
@@ -29,8 +26,8 @@ const GameInfo = styled.div`
 `;
 
 const Player = styled.div`
-  background-color: #e6e6e6;
-  color: rgb(60, 60, 60);
+  background-color: #5f3ac2;
+  color: white;
   font-size: 28px;
   display: flex;
   flex-direction: row;
@@ -38,12 +35,6 @@ const Player = styled.div`
   justify-content: center;
   padding: 5px;
   width: 100%;
-`;
-
-const PlayerIcon = styled.span`
-  position: absolute;
-  left: 5px;
-  top: 1.5px;
 `;
 
 const Game = styled.div`
@@ -57,8 +48,7 @@ const Game = styled.div`
 `;
 
 const Timer = styled.div`
-  background-color: #e6e6e6;
-  color: rgb(60, 60, 60);
+  color: white;
   padding: 5px;
   font-size: 72px;
   font-family: 'Oswald';
@@ -91,56 +81,54 @@ const App = () => {
   const [gameCompletion] = useReplicant<string>('completion', '');
 
   return (
-    <GameLayoutContainer>
-      <GameInfo className="Flex">
-        <Player>
-          <PlayerIcon>
-            <IconContext.Provider value={{ size: '1.4em' }}>
-              <MdGamepad />
-            </IconContext.Provider>
-          </PlayerIcon>
-          <span style={{ alignSelf: 'center' }}>{currentPlayer}</span>
-        </Player>
-        <Game className="Flex">
-          <p style={{ fontSize: '30px', fontWeight: '600' }}>OBECNA GRA</p>
-          <p
-            style={{
-              fontSize: currentSplit === 'GTA: San Andreas' ? '48px' : '64px',
-              fontWeight: '700',
-              margin: '0',
-            }}
-            className="shadow">
-            {currentSplit}
-          </p>
-          <p style={{ fontSize: '30px' }}>
-            <span style={{ fontWeight: '600' }}>POSTĘP UKOŃCZENIA GRY: </span>
-            <span style={{ fontWeight: '700' }}>{gameCompletion}%</span>
-          </p>
-        </Game>
-        <Timer>{timer && <span>{timer.time}</span>}</Timer>
-        <Splits className="Flex">
-          <p style={{ fontSize: '30px', fontWeight: '600' }}>CZASY UKOŃCZENIA GIER</p>
-          <div style={{ marginBottom: '20px' }}>
-            {splits.map((split) => (
-              <Split key={split.name}>
-                <span
-                  className="shadow"
-                  style={{
-                    fontSize: split.name != 'GTA III' && split.delta != 0 ? '32px' : '40px',
-                  }}>
-                  {split.name}
-                </span>
-                {split.delta != 0 && (
-                  <span style={{ fontSize: '24px' }}>
-                    - {split.formattedOriginalTime} ({split.formattedDelta})
+    <>
+      <GlobalStyle />
+      <GameLayoutContainer>
+        <GameInfo className="Flex">
+          <Player>
+            <span style={{ alignSelf: 'center' }}>{currentPlayer}</span>
+          </Player>
+          <Game className="Flex">
+            <p style={{ fontSize: '30px', fontWeight: '600' }}>OBECNA GRA</p>
+            <p
+              style={{
+                fontSize: currentSplit === 'GTA: San Andreas' ? '48px' : '64px',
+                fontWeight: '700',
+                margin: '0',
+              }}
+              className="shadow">
+              {currentSplit}
+            </p>
+            <p style={{ fontSize: '30px' }}>
+              <span style={{ fontWeight: '600' }}>POSTĘP UKOŃCZENIA GRY: </span>
+              <span style={{ fontWeight: '700' }}>{gameCompletion}%</span>
+            </p>
+          </Game>
+          <Timer className="shadow">{timer && <span>{timer.time}</span>}</Timer>
+          <Splits className="Flex">
+            <p style={{ fontSize: '30px', fontWeight: '600' }}>CZASY UKOŃCZENIA GIER</p>
+            <div style={{ marginBottom: '20px' }}>
+              {splits.map((split) => (
+                <Split key={split.name}>
+                  <span
+                    className="shadow"
+                    style={{
+                      fontSize: split.name != 'GTA III' && split.delta != 0 ? '32px' : '40px',
+                    }}>
+                    {split.name}
                   </span>
-                )}
-              </Split>
-            ))}
-          </div>
-        </Splits>
-      </GameInfo>
-    </GameLayoutContainer>
+                  {split.delta != 0 && (
+                    <span style={{ fontSize: '24px' }}>
+                      - {split.formattedOriginalTime} ({split.formattedDelta})
+                    </span>
+                  )}
+                </Split>
+              ))}
+            </div>
+          </Splits>
+        </GameInfo>
+      </GameLayoutContainer>
+    </>
   );
 };
 

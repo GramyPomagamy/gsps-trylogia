@@ -1,10 +1,8 @@
 import { render } from '../render';
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { StrictMode, useEffect, useRef, useState } from 'react';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
-import './_misc/flex.css';
-import './_misc/style.css';
-import 'animate.css';
+import { GlobalStyle } from '../global-theme';
 
 const OmnibarContainer = styled.div`
   width: 100%;
@@ -13,6 +11,9 @@ const OmnibarContainer = styled.div`
   color: rgb(60, 60, 60);
   justify-content: space-between;
   align-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 `;
 
 const CTADiv = styled.div`
@@ -70,24 +71,17 @@ export const App = () => {
   }, []);
 
   return (
-    <OmnibarContainer className="Flex">
-      <SwitchTransition mode="out-in">
-        <CSSTransition
-          key={CTA}
-          nodeRef={CTARef}
-          appear
-          in
-          timeout={1000}
-          classNames={{
-            appearActive: 'animate__animated animate__fadeInLeft',
-            enterActive: 'animate__animated animate__fadeInLeft',
-            exitActive: 'animate__animated animate__fadeOutLeft',
-          }}>
-          <CTADiv ref={CTARef} dangerouslySetInnerHTML={{ __html: CTA! }} />
-        </CSSTransition>
-      </SwitchTransition>
-      <ClockDiv dangerouslySetInnerHTML={{ __html: clock }} />
-    </OmnibarContainer>
+    <StrictMode>
+      <GlobalStyle />
+      <OmnibarContainer>
+        <SwitchTransition mode="out-in">
+          <CSSTransition key={CTA} nodeRef={CTARef} appear in timeout={1000} classNames="fade">
+            <CTADiv ref={CTARef} dangerouslySetInnerHTML={{ __html: CTA! }} />
+          </CSSTransition>
+        </SwitchTransition>
+        <ClockDiv dangerouslySetInnerHTML={{ __html: clock }} />
+      </OmnibarContainer>
+    </StrictMode>
   );
 };
 

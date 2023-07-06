@@ -7,9 +7,8 @@ import styled from 'styled-components';
 import { IoIosMusicalNotes } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
-import './_misc/style.css';
-import 'animate.css';
-import { useRef } from 'react';
+import { StrictMode, useRef } from 'react';
+import { GlobalStyle } from '../global-theme';
 
 const LayoutContainer = styled.div`
   width: 1920px;
@@ -68,38 +67,37 @@ export const App = () => {
   const countdownRef = useRef(null);
 
   return (
-    <LayoutContainer>
-      <LogoDiv>
-        <Logo src={trylogiaLogo} />
-      </LogoDiv>
-      <CountdownDiv ref={countdownRef}>
-        {countdown && countdownRunning && <span className="shadow">{countdown.formatted}</span>}
-      </CountdownDiv>
+    <StrictMode>
+      <GlobalStyle />
+      <LayoutContainer>
+        <LogoDiv>
+          <Logo src={trylogiaLogo} />
+        </LogoDiv>
+        <CountdownDiv ref={countdownRef}>
+          {countdown && countdownRunning && <span className="shadow">{countdown.formatted}</span>}
+        </CountdownDiv>
 
-      <IconContext.Provider value={{ size: '1.5em' }}>
-        {' '}
-        <SongDiv>
-          <IoIosMusicalNotes />
-          <SwitchTransition mode="out-in">
-            <CSSTransition
-              key={song}
-              nodeRef={songRef}
-              appear
-              in={true}
-              timeout={1000}
-              classNames={{
-                appearActive: 'animate__animated animate__fadeIn',
-                enterActive: 'animate__animated animate__fadeIn',
-                exitActive: 'animate__animated animate__fadeOut',
-              }}>
-              <SongName ref={songRef} className="marquee">
-                <p>{song}</p>
-              </SongName>
-            </CSSTransition>
-          </SwitchTransition>
-        </SongDiv>
-      </IconContext.Provider>
-    </LayoutContainer>
+        <IconContext.Provider value={{ size: '1.5em' }}>
+          {' '}
+          <SongDiv>
+            <IoIosMusicalNotes />
+            <SwitchTransition mode="out-in">
+              <CSSTransition
+                key={song}
+                nodeRef={songRef}
+                appear
+                in={true}
+                timeout={1000}
+                classNames="fade">
+                <SongName ref={songRef} className="marquee">
+                  <p>{song}</p>
+                </SongName>
+              </CSSTransition>
+            </SwitchTransition>
+          </SongDiv>
+        </IconContext.Provider>
+      </LayoutContainer>
+    </StrictMode>
   );
 };
 
