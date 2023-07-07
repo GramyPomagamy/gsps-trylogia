@@ -23,6 +23,9 @@ const App = () => {
         variant="filled"
         disabled={countdownRunning}
         value={countdownText}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          setCountdownText(event.target.value);
+        }}
         style={{ marginBottom: '15px' }}
         fullWidth
       />

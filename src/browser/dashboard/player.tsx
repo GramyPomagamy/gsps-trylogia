@@ -13,7 +13,7 @@ const App = () => {
     'Mr. Mary',
     'Zaborski',
     'pitpo',
-    'zola',
+    'zolaa',
     'Kappajog',
     'Fl1tch',
     'zibson',
