@@ -4,10 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 
 const App = () => {
-  const [currentPlayer, setCurrentPlayer] = useReplicant<string>(
-    'currentPlayer',
-    'PokerFacowaty'
-  );
+  const [currentPlayer, setCurrentPlayer] = useReplicant<string>('currentPlayer', 'PokerFacowaty');
 
   const players = [
     'Mr. Mary',
@@ -18,6 +15,7 @@ const App = () => {
     'Fl1tch',
     'zibson',
     'PokerFacowaty',
+    'dexterw',
   ];
 
   const handlePlayerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
