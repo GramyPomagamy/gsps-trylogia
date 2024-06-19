@@ -16,4 +16,13 @@ export interface Configschema {
 		 */
 		port: number;
 	};
+	/**
+	 * Info needed to control foobar2000.
+	 */
+	foobar: {
+		enabled: boolean;
+		address?: string;
+		musicKeyword?: string;
+		[k: string]: unknown;
+	};
 }
