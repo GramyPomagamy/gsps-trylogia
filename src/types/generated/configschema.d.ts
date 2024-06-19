@@ -22,7 +22,6 @@ export interface Configschema {
 	foobar: {
 		enabled: boolean;
 		address?: string;
-		musicKeyword?: string;
 		[k: string]: unknown;
 	};
 }

@@ -30,10 +30,6 @@
         "address": {
           "type": "string",
           "default": "http://localhost:8880"
-        },
-        "musicKeyword": {
-          "type": "string",
-          "default": "[M]"
         }
       },
       "description": "Info needed to control foobar2000.",
