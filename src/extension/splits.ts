@@ -34,22 +34,22 @@ function resetTimerRep() {
   splitsRep.value = [
     {
       name: 'GTA III',
-      originalTime: 33818000,
-      formattedOriginalTime: msToTimeStr(33818000),
+      originalTime: 35367000,
+      formattedOriginalTime: msToTimeStr(35367000),
       delta: 0,
       formattedDelta: deltaToTimeStr(0),
     },
     {
       name: 'GTA: Vice City',
-      originalTime: 80117000,
-      formattedOriginalTime: msToTimeStr(80117000),
+      originalTime: 81678000,
+      formattedOriginalTime: msToTimeStr(81678000),
       delta: 0,
       formattedDelta: deltaToTimeStr(0),
     },
     {
       name: 'GTA: San Andreas',
-      originalTime: 173626000,
-      formattedOriginalTime: msToTimeStr(173626000),
+      originalTime: 173847000,
+      formattedOriginalTime: msToTimeStr(173847000),
       delta: 0,
       formattedDelta: deltaToTimeStr(0),
     },
