@@ -1,5 +1,7 @@
 # gsps-trylogia
 
+*Tested with Node.js 18 LTS.*
+
 Graphics bundle used during the GSPS GTA 3D Trilogy 100% relay runs.
 
 ## Setup
