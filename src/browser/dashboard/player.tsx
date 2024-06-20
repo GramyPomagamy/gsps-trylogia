@@ -7,15 +7,14 @@ const App = () => {
   const [currentPlayer, setCurrentPlayer] = useReplicant<string>('currentPlayer', 'PokerFacowaty');
 
   const players = [
-    'Mr. Mary',
-    'Zaborski',
-    'pitpo',
-    'zolaa',
-    'Kappajog',
-    'Fl1tch',
-    'zibson',
     'PokerFacowaty',
+    'pitpo',
     'dexterw',
+    'Kaadzik',
+    'zolaa',
+    'Zaborski',
+    'Pkow',
+    'Kappajog'
   ];
 
   const handlePlayerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
