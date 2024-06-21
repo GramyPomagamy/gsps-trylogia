@@ -51,7 +51,7 @@ const Timer = styled.div`
   color: white;
   padding: 5px;
   font-size: 72px;
-  font-family: 'Oswald';
+  font-family: 'Bebas Neue';
   width: 100%;
 `;
 
