@@ -1,7 +1,7 @@
 import needle from 'needle';
 import type { NeedleResponse } from 'needle';
 import { get as nodecg } from './util/nodecg';
-import NodeCG from '@nodecg/types';
+import type NodeCG from 'nodecg/types';
 
 class FoobarControl {
   address: string;
