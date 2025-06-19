@@ -1,9 +1,9 @@
 import { useReplicant } from 'use-nodecg';
 import { DashboardThemeProvider } from './components/DashboardThemeProvider';
-import { createRoot } from 'react-dom/client';
 import { Button, Grid, TextField } from '@mui/material';
 import { Countdown, CountdownRunning } from '../../types/generated';
 import { useEffect, useState } from 'react';
+import { render } from '../render';
 
 const App = () => {
   const [countdownRunning] = useReplicant<CountdownRunning>('countdownRunning', false);
@@ -55,6 +55,4 @@ const App = () => {
   );
 };
 
-const container = document.getElementById('root');
-const root = createRoot(container!);
-root.render(<App />);
+render(<App />);
