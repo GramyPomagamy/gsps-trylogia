@@ -1,6 +1,6 @@
 # gsps-trylogia
 
-*Tested with Node.js 18 & 22 LTS. Node.js 20+ currently requires [extra dependencies to install native code for node-gyp](https://github.com/nodejs/node-gyp#installation).*
+*Tested with Node.js 18 & 22 LTS.*
 
 Graphics bundle used during the GSPS GTA 3D Trilogy 100% relay runs.
 
