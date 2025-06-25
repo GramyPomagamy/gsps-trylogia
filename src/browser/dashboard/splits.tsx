@@ -1,6 +1,5 @@
 import { useReplicant } from 'use-nodecg';
 import { DashboardThemeProvider } from './components/DashboardThemeProvider';
-import { createRoot } from 'react-dom/client';
 import { CurrentSplit, Splits, Timer } from '../../types/generated';
 import {
   Button,
@@ -14,6 +13,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { render } from '../render';
 
 const App = () => {
   const [splits] = useReplicant<Splits>('splits', []);
@@ -80,6 +80,5 @@ const App = () => {
     </DashboardThemeProvider>
   );
 };
-const container = document.getElementById('root');
-const root = createRoot(container!);
-root.render(<App />);
+
+render(<App />);

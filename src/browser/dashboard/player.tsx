@@ -1,20 +1,21 @@
 import { useReplicant } from 'use-nodecg';
 import { DashboardThemeProvider } from './components/DashboardThemeProvider';
-import { createRoot } from 'react-dom/client';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
+import { render } from '../render';
 
 const App = () => {
-  const [currentPlayer, setCurrentPlayer] = useReplicant<string>('currentPlayer', 'PokerFacowaty');
+  const [currentPlayer, setCurrentPlayer] = useReplicant<string>('currentPlayer', 'dexterw');
 
   const players = [
-    'PokerFacowaty',
-    'pitpo',
     'dexterw',
+    'Mr. Mary',
     'Kaadzik',
-    'zolaa',
+    'pitpo',
+    'hoxi',
     'Zaborski',
     'Pkow',
-    'Kappajog'
+    'norek',
+    'Ryuu'
   ];
 
   const handlePlayerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +38,4 @@ const App = () => {
   );
 };
 
-const container = document.getElementById('root');
-const root = createRoot(container!);
-root.render(<App />);
+render(<App />);

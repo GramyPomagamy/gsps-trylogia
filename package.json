@@ -27,7 +27,7 @@
     "prettify": "prettier --write src/browser src/extension",
     "prebuild": "npm run clean",
     "schema-types": "nodecg schema-types -o src/types/generated",
-    "start": "node ../..",
+    "start": "nodecg start",
     "watch": "run-p watch:*",
     "watch:browser": "vite",
     "watch:extension": "tsc -b tsconfig.extension.json -w --preserveWatchOutput"
@@ -46,6 +46,7 @@
     "lodash": "^4.17.21",
     "milliseconds": "^1.0.3",
     "needle": "^3.3.1",
+    "nodecg": "^2.6.1",
     "parse-ms": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -56,7 +57,6 @@
     "use-nodecg": "0.4.1-2"
   },
   "devDependencies": {
-    "@nodecg/types": "^2.1.8",
     "@types/lodash": "^4.14.195",
     "@types/milliseconds": "^0.0.30",
     "@types/react": "^18.0.37",

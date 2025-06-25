@@ -3,7 +3,7 @@ import { get as nodecg } from './util/nodecg';
 import { completionRep } from './util/replicants';
 
 const config = nodecg().bundleConfig.socket;
-const socket = io('http://' + config.address + ':' + config.port);
+const socket = io('ws://' + config.address + ':' + config.port);
 
 socket.on('connect', () => {
   nodecg().log.info('[Socket] Connected to companion socket.');
