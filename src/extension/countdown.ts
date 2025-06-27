@@ -25,7 +25,7 @@ nodecg().listenFor('stopCountdown', () => {
  * Starts the countdown at the specified startTime.
  * @param {string} startTime - A formatted time string, such as 1:00 for one hour.
  */
-function start(startTime: string = '10:00'): void {
+function start(startTime = '10:00'): void {
   if (running.value) {
     return;
   }

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   .fade-enter, .fade-appear {
@@ -104,5 +104,23 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     overflow: hidden;
     text-align: center;
+  }
+  
+  .slide-in-bottom-enter, .slide-in-bottom-appear {
+    transform: translateY(-100%);
+  }
+
+  .slide-in-bottom-enter-active, .slide-in-bottom-appear-active {
+    transform: translateY(0%);
+    transition: transform 1s;
+  }
+
+  .slide-in-bottom-exit {
+    transform: translateY(0%);
+  }
+
+  .slide-in-bottom-exit-active {
+    transform: translateY(-100%);
+    transition: transform 1s;
   }
 `;

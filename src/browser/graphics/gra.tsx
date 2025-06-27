@@ -4,6 +4,7 @@ import gameLayoutBg from './_misc/img/game-layout.png';
 import styled from 'styled-components';
 import { CurrentSplit, Splits as SplitsType, Timer as TimerType } from '../../types/generated';
 import { GlobalStyle } from '../global-theme';
+import DonationBar from './components/donation-bar';
 
 const GameLayoutContainer = styled.div`
   background-image: url(${gameLayoutBg});
@@ -14,10 +15,10 @@ const GameLayoutContainer = styled.div`
 `;
 
 const GameInfo = styled.div`
-  width: 543px;
-  height: 688px;
+  width: 603px;
+  height: 630px;
   position: fixed;
-  top: 338px;
+  top: 396px;
   text-align: center;
   justify-content: space-between;
   margin: 0;
@@ -71,6 +72,14 @@ const Split = styled.span`
   align-items: center;
   justify-content: center;
   gap: 5px;
+`;
+
+const Donations = styled.div`
+  position: fixed;
+  width: 1313px;
+  height: 44px;
+  bottom: 0px;
+  left: 607px;
 `;
 
 const App = () => {
@@ -127,6 +136,7 @@ const App = () => {
             </div>
           </Splits>
         </GameInfo>
+        <Donations><DonationBar /></Donations>
       </GameLayoutContainer>
     </>
   );

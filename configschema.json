@@ -22,6 +22,7 @@
     },
     "foobar": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -34,7 +35,35 @@
       },
       "description": "Info needed to control foobar2000.",
       "required": ["enabled"]
+    },
+    "tracker": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "username": {
+          "type": "string",
+          "default": ""
+        },
+        "password": {
+          "type": "string",
+          "default": ""
+        },
+        "eventID": {
+          "type": "number",
+          "default": 18
+        },
+        "rootURL": {
+          "type": "string",
+          "default": "https://gsps.pl/donacje"
+        }
+      },
+      "description": "Login information for the private areas of the tracker API.",
+      "required": ["enabled", "rootURL"]
     }
   },
-  "required": ["socket", "foobar"]
+  "required": ["socket", "foobar", "tracker"]
 }

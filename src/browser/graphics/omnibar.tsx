@@ -1,8 +1,9 @@
-import { render } from '../render';
-import styled from 'styled-components';
-import { StrictMode, useEffect, useRef, useState } from 'react';
-import { SwitchTransition, CSSTransition } from 'react-transition-group';
-import { GlobalStyle } from '../global-theme';
+import { render } from "../render";
+import styled from "styled-components";
+import { StrictMode, useEffect, useRef, useState } from "react";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
+import { GlobalStyle } from "../global-theme";
+import Total from "./components/total";
 
 const OmnibarContainer = styled.div`
   width: 100%;
@@ -21,16 +22,6 @@ const CTADiv = styled.div`
   font-size: 24px;
 `;
 
-const ClockDiv = styled.div`
-  font-size: 34px;
-  align-self: flex-end;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-top: auto;
-  margin-bottom: auto;
-  text-align: right;
-`;
-
 export const App = () => {
   const CTAs = [
     'Dołącz do naszej społeczności na Discordzie na <b class="highlight">gsps.pl/discord</b>!',
@@ -41,15 +32,6 @@ export const App = () => {
   const [CTA, setCTA] = useState(CTAs[currentCTAIndex]);
   const CTARef = useRef(null);
 
-  const getClockHTML = () => {
-    const date_ob = new Date();
-    const hours = ('0' + date_ob.getHours()).slice(-2);
-    const minutes = ('0' + date_ob.getMinutes()).slice(-2);
-    return `${hours}:${minutes}`;
-  };
-
-  const [clock, setClock] = useState(getClockHTML());
-
   const setNextCTA = () => {
     currentCTAIndex++;
     if (currentCTAIndex >= CTAs.length) {
@@ -59,11 +41,6 @@ export const App = () => {
   };
 
   useEffect(() => {
-    // update clock every half a second
-    setInterval(() => {
-      setClock(getClockHTML());
-    }, 500);
-
     // update CTA every 10 seconds
     setInterval(() => {
       setNextCTA();
@@ -75,11 +52,18 @@ export const App = () => {
       <GlobalStyle />
       <OmnibarContainer>
         <SwitchTransition mode="out-in">
-          <CSSTransition key={CTA} nodeRef={CTARef} appear in timeout={1000} classNames="fade">
+          <CSSTransition
+            key={CTA}
+            nodeRef={CTARef}
+            appear
+            in
+            timeout={1000}
+            classNames="fade"
+          >
             <CTADiv ref={CTARef} dangerouslySetInnerHTML={{ __html: CTA! }} />
           </CSSTransition>
         </SwitchTransition>
-        <ClockDiv dangerouslySetInnerHTML={{ __html: clock }} />
+        <Total />
       </OmnibarContainer>
     </StrictMode>
   );
