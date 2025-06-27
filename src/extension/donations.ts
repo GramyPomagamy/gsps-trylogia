@@ -153,7 +153,7 @@ async function refreshTrackerData() {
 if (config.enabled) {
   loginToTracker().then(async () => {
     refreshTrackerData().then(() => {
-      setTimeout(refreshTrackerData, refreshTime);
+      setInterval(refreshTrackerData, refreshTime);
     });
   });
 }
