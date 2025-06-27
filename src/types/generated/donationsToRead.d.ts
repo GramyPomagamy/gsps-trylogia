@@ -6,9 +6,14 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Timer {
-	time: string;
-	milliseconds: number;
+export type DonationsToRead = {
+	id: number;
+	name: string;
+	amount: number;
+	comment?: string;
 	timestamp: number;
-	phase: string;
-}
+	bid?: {
+		id?: number;
+		amount?: number;
+	}[];
+}[];

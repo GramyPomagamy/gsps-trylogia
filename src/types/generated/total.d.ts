@@ -6,9 +6,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Timer {
-	time: string;
-	milliseconds: number;
-	timestamp: number;
-	phase: string;
+export interface Total {
+	raw?: number;
+	formatted?: string;
 }
