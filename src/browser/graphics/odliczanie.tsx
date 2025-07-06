@@ -3,7 +3,7 @@ import trylogiaLogo from './_misc/img/trylogia_logo.png';
 import mainBg from './_misc/img/main-background.png';
 import { useReplicant } from 'use-nodecg';
 import { Countdown, CountdownRunning } from '../../types/generated';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { IoIosMusicalNotes } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
@@ -39,6 +39,8 @@ const Logo = styled.img`
   height: 100%;
 `;
 
+const songBackgroundSize = '576px';
+
 const SongDiv = styled.div`
   display: flex;
   position: fixed;
@@ -53,6 +55,29 @@ const SongDiv = styled.div`
   border-radius: 0px 7px 7px 0px;
   align-content: space-between;
   justify-content: space-between;
+`;
+
+const scrollLeftAnimation = keyframes`
+    0% {
+      -moz-transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+      transform: translateX(${songBackgroundSize});
+    }
+    100% {
+      -moz-transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+      transform: translateX(-100%);
+    }
+`;
+
+const SongScroller = styled.div`
+  position: absolute;
+  height: 100%;
+  width: max-content;
+  line-height: 50px;
+  text-align: center;
+  transform: translateX(100%);
+  animation: ${scrollLeftAnimation} 18s linear infinite
 `;
 
 const SongName = styled.div`
@@ -91,7 +116,7 @@ export const App = () => {
                 timeout={1000}
                 classNames="fade">
                 <SongName ref={songRef} className="marquee">
-                  <p>{song}</p>
+                  <SongScroller>{song}</SongScroller>
                 </SongName>
               </CSSTransition>
             </SwitchTransition>
