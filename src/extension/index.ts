@@ -9,4 +9,5 @@ export default (nodecg: NodeCG) => {
   require("./splits");
   require("./timer");
   require("./donations");
+  require("./media-box");
 };

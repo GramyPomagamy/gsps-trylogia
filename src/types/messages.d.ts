@@ -7,4 +7,5 @@ export type MessageMap = {
   timerStart: {};
   timerReset: { data: boolean };
   timerPause: {};
+  'mediaBox:showNextBreakItem': {}
 };

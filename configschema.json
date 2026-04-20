@@ -63,7 +63,32 @@
       },
       "description": "Login information for the private areas of the tracker API.",
       "required": ["enabled", "rootURL"]
+    },
+    "players": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "splits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "GTA3": {
+          "type": "string",
+          "default": "9:23:38"
+        },
+        "GTAVC": {
+          "type": "string",
+          "default": "22:15:17"
+        },
+        "GTASA": {
+          "type": "string",
+          "default": "48:13:46"
+        }
+      },
+      "required": ["GTA3", "GTAVC", "GTASA"]
     }
   },
-  "required": ["socket", "foobar", "tracker"]
+  "required": ["socket", "foobar", "tracker", "players", "splits"]
 }
