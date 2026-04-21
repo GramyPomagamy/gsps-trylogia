@@ -1,3 +1,3 @@
-import { tsConfig, vueConfig } from '@gramypomagamy/eslint-config';
+import { tsConfig, reactConfig } from '@gramypomagamy/eslint-config';
 
-export default [...tsConfig, ...vueConfig];
+export default [...tsConfig, ...reactConfig];
