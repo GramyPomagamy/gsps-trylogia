@@ -2,13 +2,14 @@
 
 import { get as nodecg } from './util/nodecg';
 import { timerRep, currentSplitRep, splitsRep } from './util/replicants';
-import { msToTimeStr, deltaToTimeStr } from './util/helpers';
+import { msToTimeStr, deltaToTimeStr, timeStrToMS } from './util/helpers';
 
 const splitNames: Array<'GTA III' | 'GTA: Vice City' | 'GTA: San Andreas'> = [
   'GTA III',
   'GTA: Vice City',
   'GTA: San Andreas',
 ];
+const splitsTime = nodecg().bundleConfig.splits;
 
 function handleSplit() {
   const currentSplitIndex = splitNames.indexOf(currentSplitRep.value!);
@@ -34,22 +35,22 @@ function resetTimerRep() {
   splitsRep.value = [
     {
       name: 'GTA III',
-      originalTime: 33946000,
-      formattedOriginalTime: msToTimeStr(33946000),
+      originalTime: timeStrToMS(splitsTime.GTA3),
+      formattedOriginalTime: splitsTime.GTA3,
       delta: 0,
       formattedDelta: deltaToTimeStr(0),
     },
     {
       name: 'GTA: Vice City',
-      originalTime: 80388000,
-      formattedOriginalTime: msToTimeStr(80388000),
+      originalTime: timeStrToMS(splitsTime.GTAVC),
+      formattedOriginalTime: splitsTime.GTAVC,
       delta: 0,
       formattedDelta: deltaToTimeStr(0),
     },
     {
       name: 'GTA: San Andreas',
-      originalTime: 162392000,
-      formattedOriginalTime: msToTimeStr(162392000),
+      originalTime: timeStrToMS(splitsTime.GTASA),
+      formattedOriginalTime: splitsTime.GTASA,
       delta: 0,
       formattedDelta: deltaToTimeStr(0),
     },

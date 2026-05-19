@@ -1,7 +1,7 @@
 {
   "name": "gsps-trylogia",
   "version": "2.0.0",
-  "description": "Layouts used during the 2023 GTA 3D Trilogy 100% relay.",
+  "description": "Layouts used during the annual GTA 3D Trilogy 100% relay.",
   "homepage": "https://github.com/GramyPomagamy/gsps-trylogia#readme",
   "bugs": {
     "url": "https://github.com/GramyPomagamy/gsps-trylogia/issues"
@@ -13,7 +13,8 @@
   "license": "GPL-v3.0",
   "author": "GramyPomagamy",
   "contributors": [
-    "hoXyy"
+    "hoXyy",
+    "Pkow"
   ],
   "scripts": {
     "autofix": "run-s autofix:*",
@@ -43,6 +44,7 @@
     "animate.css": "^4.1.1",
     "events": "^3.3.0",
     "gsap": "^3.13.0",
+    "klona": "^2.0.6",
     "livesplit-core": "^0.10.2",
     "lodash": "^4.17.21",
     "milliseconds": "^1.0.3",
@@ -59,6 +61,7 @@
     "use-nodecg": "0.4.1-2"
   },
   "devDependencies": {
+    "@gramypomagamy/eslint-config": "^3.0.0",
     "@types/lodash": "^4.14.195",
     "@types/milliseconds": "^0.0.30",
     "@types/react": "^18.0.37",
@@ -87,11 +90,26 @@
   },
   "nodecg": {
     "compatibleRange": "^1.8.1 || ^2.0.0",
+    "assetCategories": [
+      {
+        "name": "media-box",
+        "title": "Obrazy dla media boxa",
+        "allowedTypes": [
+          "png"
+        ]
+      }
+    ],
     "dashboardPanels": [
       {
         "file": "player.html",
         "name": "player",
         "title": "Wybór gracza",
+        "width": 3
+      },
+      {
+        "file": "guide.html",
+        "name": "guide",
+        "title": "Wybór Hołowczyca",
         "width": 3
       },
       {
@@ -111,6 +129,12 @@
         "name": "splits",
         "title": "Splity",
         "width": 4
+      },
+      {
+        "name": "media-box-controls",
+        "title": "Kontrola mediaboxa",
+        "file": "media-box-controls.html",
+        "fullbleed": true
       }
     ],
     "graphics": [

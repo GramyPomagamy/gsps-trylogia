@@ -4,22 +4,22 @@ import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mu
 import { render } from '../render';
 
 const App = () => {
-  const [currentPlayer, setCurrentPlayer] = useReplicant<string>('currentPlayer', 'dexterw');  
-  const players = nodecg.bundleConfig.players;
+  const [currentGuide, setCurrentGuide] = useReplicant<string>('currentGuide', 'hoXyy');  
+  const guides = nodecg.bundleConfig.players;
 
   const handlePlayerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentPlayer((event.target as HTMLInputElement).value);
+    setCurrentGuide((event.target as HTMLInputElement).value);
   };
 
   return (
     <DashboardThemeProvider>
       <FormControl>
         <FormLabel>
-          Obecny gracz: <b>{currentPlayer}</b>
+          Obecny Hołowczyc: <b>{currentGuide}</b>
         </FormLabel>
-        <RadioGroup value={currentPlayer} onChange={handlePlayerChange}>
-          {players.map((player) => {
-            return <FormControlLabel value={player} control={<Radio />} label={player} />;
+        <RadioGroup value={currentGuide} onChange={handlePlayerChange}>
+          {guides.map((guide) => {
+            return <FormControlLabel value={guide} control={<Radio />} label={guide} />;
           })}
         </RadioGroup>
       </FormControl>

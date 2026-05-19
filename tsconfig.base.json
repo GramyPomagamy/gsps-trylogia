@@ -17,7 +17,7 @@
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
-		"noImplicitOverride": false, // TODO: enable this
+		"noImplicitOverride": true,
 		"noPropertyAccessFromIndexSignature": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,

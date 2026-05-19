@@ -34,4 +34,10 @@ export interface Configschema {
 		eventID?: number;
 		rootURL: string;
 	};
+	players: string[];
+	splits: {
+		GTA3: string;
+		GTAVC: string;
+		GTASA: string;
+	};
 }
